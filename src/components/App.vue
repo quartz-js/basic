@@ -74,7 +74,7 @@
     <v-content>
 
 
-      <v-container style='padding: 0; max-width: 1200px'>
+      <v-container style='padding: 0; max-width: 1400px'>
           <router-view :user="user"/>
       </v-container>
     </v-content>
@@ -96,13 +96,14 @@ export default {
     return {
       search: null,
       isDark: false,
-      drawer: store.get('app.sidebar', true)
+      drawer: store.get('app.sidebar', false)
     }
   },
   watch: {
     drawer: {
-      handler: () => {
+      handler: function () {
         store.set('app.sidebar', this.drawer)
+        console.log(store.get('app.sidebar'));
       }
     }
   },
