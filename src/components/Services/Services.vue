@@ -1,10 +1,13 @@
 <template>
   <div>
     <v-card flat>
-      <v-list two-line v-for="(tag, index) in tags" :key="index">
+      <div v-for="(tag, index) in tags" :key="index">
         <v-subheader class="title">{{ $t('$quartz.tags.' + tag) }}</v-subheader>
-        <service-item :services="retrieveServices(tag)"></service-item>
-      </v-list>
+        <v-divider></v-divider>
+        <v-list three-line>
+          <service-item :services="retrieveServices(tag)"></service-item>
+        </v-list>
+      </div>
     </v-card>
   </div>
 </template>
