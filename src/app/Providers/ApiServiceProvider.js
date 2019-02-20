@@ -13,10 +13,8 @@ export class ApiServiceProvider extends ServiceProvider {
     var api = new IndexApi()
 
     return api.index({}).then(response => {
-      container.set('app.data-builders', response.body.app.data_builders.map(val => {
-        return {value: val, label: val}
-      }))
 
+      container.set('api.index', response.body.app);
       container.set('app.events', response.body.app.events.map(val => {
         return {value: val, label: val}
       }))
