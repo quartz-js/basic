@@ -1,0 +1,15 @@
+{
+  "$quartz": {
+    "notification": {
+      "title": "Notifications",
+      "show_all": "Show all"
+    },
+    "settings": {
+      "title": "Settings",
+      "language" : "Language"
+    },
+    "auth": {
+      "logout": "Logout"
+    }
+  }
+}
