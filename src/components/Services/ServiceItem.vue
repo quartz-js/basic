@@ -97,5 +97,6 @@ export default {
   .item .v-list__tile__sub-title {
     line-clamp: 3;
     -webkit-line-clamp: 3;
+    max-height: 63px;
   }
 </style>
