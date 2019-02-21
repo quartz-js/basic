@@ -5,8 +5,11 @@
         <v-subheader class="title">{{ $t('$quartz.tags.' + tag) }}</v-subheader>
         <v-divider></v-divider>
         <v-list three-line>
-          <service-item :services="retrieveServices(tag)"></service-item>
+          <service-item :services="retrieveServices(tag)" :show-hidden="showHidden"></service-item>
         </v-list>
+      </div>
+      <div class='text-xs-right mt-5'>
+        <a href='#' @click="showHidden = !showHidden">{{ !showHidden ? "Show disabled" : "Hide disabled"}}</a>
       </div>
     </v-card>
   </div>
@@ -25,6 +28,7 @@ export default {
   data () {
     return {
       services: [],
+      showHidden: false,
       tags: container.get('$quartz.tags')
     }
   },
