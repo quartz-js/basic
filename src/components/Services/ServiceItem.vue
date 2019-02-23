@@ -2,9 +2,11 @@
   <div>
     <v-list-tile v-for="(service, index) in services"  :key="index" class="item" :class="{'disabled': !canShow(service) }" v-if="showHidden || canShow(service)" >
 
-      <v-list-tile-avatar :size="90" tile class='pt-2'>
-        <img :src="service.icon">
-      </v-list-tile-avatar>
+      <router-link :to="service.route">
+        <v-list-tile-avatar :size="90" tile class='pt-2' >
+          <img :src="service.icon">
+        </v-list-tile-avatar>
+      </router-link>
 
       <v-list-tile-content class="pl-4">
         <v-list-tile-title>
@@ -76,6 +78,7 @@ export default {
   .item {
     height: 114px !important;
   }
+
   .item .v-list__tile .v-list__tile__action {
     cursor: pointer;
     padding: 10px;
