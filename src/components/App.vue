@@ -75,7 +75,7 @@
 
 
       <v-container style='padding: 0; max-width: 1400px'>
-          <router-view :user="user"/>
+          <router-view :user="user" :key="$route.fullPath"/>
       </v-container>
     </v-content>
 
