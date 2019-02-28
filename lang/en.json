@@ -13,7 +13,11 @@
     },
     "basic": {
       "show-disabled": "Show Disabled",
-      "hide-disabled": "Hide Disabled"
+      "hide-disabled": "Hide Disabled",
+      "show": "Show",
+      "hide": "Hide",
+      "nav-add": "Sidebar - Add",
+      "nav-remove": "Sidebar - Remove"
     }
   }
 }

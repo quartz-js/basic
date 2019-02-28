@@ -25,11 +25,11 @@
             <v-icon accent>more_horiz</v-icon>
           </v-btn>
           <v-list>
-            <v-list-tile @click="toggle(service)">
-              <v-list-tile-title>Add/Remove in Nav</v-list-tile-title>
+            <v-list-tile @click="toggleMenu(service)">
+              <v-list-tile-title>{{ hasMenu(service) ? $t("$quartz.basic.nav-remove") : $t("$quartz.basic.nav-add") }}</v-list-tile-title>
             </v-list-tile>
             <v-list-tile @click="toggleShow(service)">
-              <v-list-tile-title>{{ canShow(service) ? "Hide" : "Show" }}</v-list-tile-title>
+              <v-list-tile-title>{{ canShow(service) ? $t("$quartz.basic.hide") : $t("$quartz.basic.show")  }}</v-list-tile-title>
             </v-list-tile>
           </v-list>
         </v-menu>
@@ -41,26 +41,25 @@
 <script>
 
 import store from 'store2'
+import { container } from '@railken/quartz-core'
 
 export default {
   props: ['services', 'showHidden'],
   methods: {
-    toggle (service) {
-      store.set(this.getWithPrefix(service), !store.get(this.getWithPrefix(service)))
-      this.$root.$forceUpdate()
-    },
-    getWithPrefix (service) {
-      return 'app.stars.' + service.route.name
+    toggleMenu (service) {
+      container.get('settings').store('app.services.menu.' + service.name, !parseInt(container.get('settings').get('app.services.menu.' + service.name, 0)) ? 1 : 0)
+      this.$forceUpdate()
+      window.bus.$emit('settings-user.update');
     },
     toggleShow (service) {
-      store.set('services.show.' + service.name, !store.get('services.show.' + service.name, true))
+      container.get('settings').store('app.services.show.' + service.name, !parseInt(container.get('settings').get('app.services.show.' + service.name, 1)) ? 1 : 0)
       this.$forceUpdate()
     },
     canShow (service) {
-      return store.get('services.show.' + service.name, true)
+      return parseInt(container.get('settings').get('app.services.show.' + service.name, 1))
     },
-    has (service) {
-      return store.get(this.getWithPrefix(service))
+    hasMenu (service) {
+      return parseInt(container.get('settings').get('app.services.menu.' + service.name, 0))
     }
   }
 }

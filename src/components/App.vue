@@ -64,7 +64,7 @@
         <div v-for="(tag, index) in services" :key="index">
           <v-list-tile  :to="{name: service.route.name}" v-for="(service, index) in tag" :key="index">
             <v-list-tile-content>
-              <v-list-tile-title>{{ service.name }}</v-list-tile-title>
+              <v-list-tile-title>{{ $t("$quartz.data." + service.name + ".name") }}</v-list-tile-title>
             </v-list-tile-content>
           </v-list-tile>
         </div>
@@ -72,10 +72,9 @@
     </v-navigation-drawer>
 
     <v-content>
-
-
       <v-container style='padding: 0; max-width: 1400px'>
-          <router-view :user="user" :key="$route.fullPath"/>
+        <router-view :user="user" :key="$route.fullPath"/>
+        
       </v-container>
     </v-content>
 
@@ -96,35 +95,46 @@ export default {
     return {
       search: null,
       isDark: false,
-      drawer: store.get('app.sidebar', false)
+      drawer: parseInt(container.get('settings').get('app.sidebar', 0))
     }
   },
   watch: {
     drawer: {
       handler: function () {
-        store.set('app.sidebar', this.drawer)
-        console.log(store.get('app.sidebar'));
+        container.get('settings').store('app.sidebar', this.drawer)
       }
     }
   },
   methods: {
+    load () {
+
+      this.services = {}
+
+      container.get('$quartz.data').filter((module) => {
+        return module.route && module.route && parseInt(container.get('settings').get('app.services.menu.' + module.name))
+      }).forEach((module) => {
+        if (typeof this.services[module.tags[0]] === 'undefined') {
+          this.services[module.tags[0]] = []
+        }
+
+        this.services[module.tags[0]].push(module)
+      })
+
+    },
     logout () {
       container.get('oauth').logout()
       window.location.href = '/'
     }
   },
   created () {
-    this.services = {}
 
-    container.get('$quartz.data').filter((module) => {
-      return module.route && module.route && store.get('app.stars.' + module.route.name)
-    }).forEach((module) => {
-      if (typeof this.services[module.tags[0]] === 'undefined') {
-        this.services[module.tags[0]] = []
-      }
+    window.bus.$on('settings-user.update', () => {
+      this.load();
+      this.drawer = true;
+      this.$forceUpdate();
+    });
 
-      this.services[module.tags[0]].push(module)
-    })
+    this.load();
   }
 }
 </script>
