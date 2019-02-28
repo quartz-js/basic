@@ -10,6 +10,10 @@
     },
     "auth": {
       "logout": "Disconnettiti"
+    },
+    "basic": {
+      "show-disabled": "Mostra elementi disattivati",
+      "hide-disabled": "Nascondi elementi disattivati"
     }
   }
 }

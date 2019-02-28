@@ -10,6 +10,10 @@
     },
     "auth": {
       "logout": "Logout"
+    },
+    "basic": {
+      "show-disabled": "Show Disabled",
+      "hide-disabled": "Hide Disabled"
     }
   }
 }

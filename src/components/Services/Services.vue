@@ -9,7 +9,7 @@
         </v-list>
       </div>
       <div class='text-xs-right mt-5'>
-        <a href='#' @click="showHidden = !showHidden">{{ !showHidden ? "Show disabled" : "Hide disabled"}}</a>
+        <a href='#' @click="showHidden = !showHidden">{{ !showHidden ? $t('$quartz.basic.show-disabled') : $t('$quartz.basic.hide-disabled')}}</a>
       </div>
     </v-card>
   </div>
