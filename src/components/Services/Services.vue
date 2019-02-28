@@ -5,7 +5,7 @@
         <service-item :tag="tag" :services="retrieveServices(tag)" :show-hidden="showHidden"></service-item>
       </div>
       <div class='text-xs-right mt-5'>
-        <a href='#' @click="showHidden = !showHidden">{{ !showHidden ? $t('$quartz.basic.show-disabled') : $t('$quartz.basic.hide-disabled')}}</a>
+        <a href="javascript:;" @click="showHidden = !showHidden">{{ !showHidden ? $t('$quartz.basic.show-disabled') : $t('$quartz.basic.hide-disabled')}}</a>
       </div>
     </v-card>
   </div>
