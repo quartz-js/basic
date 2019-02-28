@@ -2,11 +2,7 @@
   <div>
     <v-card flat>
       <div v-for="(tag, index) in tags" :key="index">
-        <v-subheader class="title">{{ $t('$quartz.tags.' + tag) }}</v-subheader>
-        <v-divider></v-divider>
-        <v-list three-line>
-          <service-item :services="retrieveServices(tag)" :show-hidden="showHidden"></service-item>
-        </v-list>
+        <service-item :tag="tag" :services="retrieveServices(tag)" :show-hidden="showHidden"></service-item>
       </div>
       <div class='text-xs-right mt-5'>
         <a href='#' @click="showHidden = !showHidden">{{ !showHidden ? $t('$quartz.basic.show-disabled') : $t('$quartz.basic.hide-disabled')}}</a>
@@ -45,12 +41,7 @@ export default {
 }
 </script>
 <style scoped>
-
   .v-card {
     padding: 30px 50px;
-  }
-  .v-list > div:last-child {
-    display: flex;
-    flex-wrap: wrap;
   }
 </style>
