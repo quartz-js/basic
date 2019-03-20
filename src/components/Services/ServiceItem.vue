@@ -58,11 +58,14 @@ export default {
       window.bus.$emit('settings-user.update');
     },
     toggleShow (service) {
-      container.get('settings').store('app.services.show.' + service.name, !parseInt(container.get('settings').get('app.services.show.' + service.name, 1)) ? 1 : 0)
+      container.get('settings').store('app.services.show.' + service.name, !parseInt(container.get('settings').get('app.services.show.' + service.name, this.getDefaultValueService(service))) ? 1 : 0)
       this.$forceUpdate()
     },
+    getDefaultValueService (service) {
+      return service.priority > 0 ? 1 : 0
+    },
     canShow (service) {
-      return parseInt(container.get('settings').get('app.services.show.' + service.name, service.priority > 0 ? 1 : 0))
+      return parseInt(container.get('settings').get('app.services.show.' + service.name, this.getDefaultValueService(service)))
     },
     hasMenu (service) {
       return parseInt(container.get('settings').get('app.services.menu.' + service.name, 0))
