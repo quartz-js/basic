@@ -62,7 +62,7 @@ export default {
       this.$forceUpdate()
     },
     canShow (service) {
-      return parseInt(container.get('settings').get('app.services.show.' + service.name, 1))
+      return parseInt(container.get('settings').get('app.services.show.' + service.name, service.priority > 0 ? 1 : 0))
     },
     hasMenu (service) {
       return parseInt(container.get('settings').get('app.services.menu.' + service.name, 0))
