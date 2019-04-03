@@ -23,8 +23,15 @@ var routes = [
       }
     ]
   },
-  { path: '/404', component: () => import('../components/Errors/NotFound') },
-  { path: '*', redirect: '/404' }
+  { 
+    path: '/404', 
+    component: () => import('../components/Errors/NotFound'), 
+    beforeEnter: Guard.auth
+  },
+  { 
+    path: '*', 
+    redirect: '/404'
+  }
 ];
 
 export default routes;
