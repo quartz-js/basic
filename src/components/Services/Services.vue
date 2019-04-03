@@ -3,6 +3,7 @@
     <v-card flat>
       <div v-for="(tag, index) in tags" :key="index">
         <service-item :tag="tag" :services="retrieveServices(tag)" :show-hidden="showHidden"></service-item>
+        
       </div>
       <div class='text-xs-right mt-5'>
         <a href="javascript:;" @click="showHidden = !showHidden">{{ !showHidden ? $t('$quartz.basic.show-disabled') : $t('$quartz.basic.hide-disabled')}}</a>
@@ -31,12 +32,12 @@ export default {
   methods: {
     retrieveServices (tag) {
       return this.services.filter((val) => {
-        return val.tags && val.tags.indexOf(tag) !== -1 && val.name && val.route
+        return val.tags && val.tags.indexOf(tag) !== -1 && val.config.label && val.config.options.url
       })
     },
   },
   mounted () {
-    this.services = container.get('$quartz.data')
+    this.services = container.get('$quartz.view.services')
   }
 }
 </script>

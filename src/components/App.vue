@@ -9,7 +9,7 @@
       <!--<v-text-field
         class="mx-5 mt-2"
         flat
-        label="Search"
+        placeholder="Search"
         prepend-inner-icon="search"
       ></v-text-field>-->
 
@@ -127,7 +127,6 @@ export default {
     }
   },
   created () {
-
     window.bus.$on('settings-user.update', () => {
       this.load();
       this.drawer = true;

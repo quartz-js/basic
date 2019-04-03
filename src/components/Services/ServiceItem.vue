@@ -4,7 +4,7 @@
     <v-divider></v-divider>
     <v-list three-line class="list-main">
       <v-list-tile v-for="(service, index) in services" :key="index" class="item" :class="{'disabled': !canShow(service) }" v-if="showHidden || canShow(service)" >
-        <router-link :to="service.route">
+        <router-link :to="service.config.options.url">
           <v-list-tile-avatar :size="90" tile class='pt-2' >
             <img :src="service.icon">
           </v-list-tile-avatar>
@@ -12,7 +12,7 @@
 
         <v-list-tile-content class="pl-4">
           <v-list-tile-title>
-            <router-link :to="service.route">{{ $t("$quartz.data." + service.name + ".name") }}</router-link>
+            <router-link :to="service.config.options.url">{{ $t("$quartz.data." + service.config.label + ".name") }}</router-link>
           </v-list-tile-title>
           <v-list-tile-sub-title>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer lobortis in arcu at pellentesque. Sed at porta odio. Vivamus sollicitudin euismod justo id ornare. Suspendisse a metus orci. Cras tempor finibus metus, nec dictum enim sollicitudin sit amet. Vestibulum et suscipit lacus. Nam vestibulum tempus dolor.

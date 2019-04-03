@@ -7,6 +7,7 @@ import Vuetify from 'vuetify'
 import VueI18n from 'vue-i18n'
 import QuartzCore from '@railken/quartz-core'
 import App from '@/App'
+import Router from 'vue-router'
 
 export class VueServiceProvider extends ServiceProvider {
 
@@ -15,11 +16,16 @@ export class VueServiceProvider extends ServiceProvider {
     Vue.config.productionTip = false
 
     Vue.use(QuartzCore) 
+
     Vue.use(VueLocalStorage)
+    console.log(Vue.options.components)
     Vue.use(VueI18n)
     window.bus = new Vue()
 
+    Vue.use(this.loadComponents);
+
     var router = container.get('$vue.router');
+
 
 
     var i18n = new VueI18n({
@@ -33,9 +39,25 @@ export class VueServiceProvider extends ServiceProvider {
         t: (key, ...params) => i18n.t(key, params)
       }
     })
+
+    Vue.use(Router)
+
+    var router = new Router({
+      scrollBehavior () {
+        return { x: 0, y: 0 }
+      },
+      routes: container.get('$vue.routes'),
+      hashbang: false,
+      history: true,
+      mode: 'history'
+    })
+
+    container.set("$vue.router", router)
       
 
-    var vue = new Vue({
+    console.log(Vue.options.components)
+
+    var v = new Vue({
       i18n: i18n,
       router,
       template: '<App/>',
@@ -52,6 +74,8 @@ export class VueServiceProvider extends ServiceProvider {
       }
     }).$mount('#app')
 
-    container.set('$vue.app', vue);
+
+
+    container.set('$vue.app', v);
   }
 }
