@@ -6,7 +6,8 @@
       <v-list-tile v-for="(service, index) in services" :key="index" class="item" :class="{'disabled': !canShow(service) }" v-if="showHidden || canShow(service)" >
         <router-link :to="service.config.options.url">
           <v-list-tile-avatar :size="90" tile class='pt-2' >
-            <img :src="service.icon">
+            <img :src="service.config.icon">
+            
           </v-list-tile-avatar>
         </router-link>
 
