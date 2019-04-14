@@ -1,17 +1,61 @@
 <template>
-  <v-app v-if="user" :dark="isDark" style='background: white '>
+  <v-app v-if="user" :dark="isDark" style=''>
     <v-toolbar class="toolbar" app >
 
       <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
 
       <v-toolbar-title>{{ $root.config.app.name }}</v-toolbar-title>
 
-      <!--<v-text-field
+
+      <!--<v-autocomplete
         class="mx-5 mt-2"
         flat
-        placeholder="Search"
+        append-icon=""
         prepend-inner-icon="search"
-      ></v-text-field>-->
+        clear-icon
+        v-model="searchQuery"
+        :items="searchResults"
+        :loading="searchLoading"
+        :search-input.sync="search"
+        hide-details
+        hide-selected
+        label="Ain't a great day to search something?"
+        solo
+      >
+        <template v-slot:no-data>
+          <v-list-tile>
+            <v-list-tile-title>
+              No results
+              <strong>found</strong>
+            </v-list-tile-title>
+          </v-list-tile>
+        </template>
+        <template v-slot:item="{ item }">
+
+          <v-list-tile avatar>
+            <v-list-tile-avatar>
+              <img src="http://192.168.1.5:8000/assets/amethyst/customer-icon.svg" alt="John">
+            </v-list-tile-avatar>
+
+            <v-list-tile-content>
+              <v-list-tile-title>Customer</v-list-tile-title>
+              <v-list-tile-sub-title>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer lobortis in arcu at pellentesque. </v-list-tile-sub-title>
+            </v-list-tile-content>
+
+            <v-list-tile-action>
+              <v-btn
+                :class="fav ? 'red--text' : ''"
+                icon
+                @click="fav = !fav"
+              >
+                <v-icon>favorite</v-icon>
+              </v-btn>
+            </v-list-tile-action>
+          </v-list-tile>
+        </template>
+      </v-autocomplete>
+      -->
+
 
       <div class='fluid-fill'></div>
 
@@ -86,6 +130,7 @@ import { container } from '@railken/quartz-core'
 import NotificationIcon from '@railken/quartz/notification/src/components/notification/notification-icon'
 import store from 'store2'
 
+
 export default {
   props: ['user'],
   components: {
@@ -93,6 +138,8 @@ export default {
   },
   data () {
     return {
+      searchResults: [{a:1}],
+      searchQuery: null,
       search: null,
       isDark: false,
       drawer: parseInt(container.get('settings').get('app.sidebar', 0))
@@ -167,4 +214,9 @@ export default {
     margin: 0;
   }
 
+  .v-autocomplete__content.v-menu__content {
+    /*border: 2px solid #efefef;
+    box-shadow: none;
+    margin-top: 3px;*/
+  }
 </style>

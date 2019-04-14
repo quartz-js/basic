@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-card flat>
+    <v-card flat class="resource-card mt-5">
       <div v-for="(tag, index) in tags" :key="index">
         <service-item :tag="tag" :services="retrieveServices(tag)" :show-hidden="showHidden"></service-item>
         
