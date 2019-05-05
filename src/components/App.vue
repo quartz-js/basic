@@ -115,6 +115,21 @@
       </v-list>
     </v-navigation-drawer>
 
+    <v-snackbar
+      v-model="snackbar.active"
+      :color="snackbar.background"
+      :timeout="snackbar.timeout"
+    >
+      {{ snackbar.message }}
+      <v-btn
+        :color="snackbar.color"
+        flat
+        @click="snackbar.active = false"
+      >
+        Close
+      </v-btn>
+    </v-snackbar>
+
     <v-content>
       <v-container style='padding: 0; max-width: 1400px'>
         <router-view :user="user" :key="$route.fullPath"/>
@@ -128,7 +143,9 @@
 <script>
 import { container } from '@railken/quartz-core'
 import NotificationIcon from '@railken/quartz/notification/src/components/notification/notification-icon'
+import { DataViewError } from '@railken/quartz/data-view/src/app/Errors/DataViewError'
 import store from 'store2'
+import _ from 'lodash'
 
 
 export default {
@@ -136,8 +153,23 @@ export default {
   components: {
     NotificationIcon
   },
+  errorCaptured: (err, vm, info) => {
+    if (err instanceof DataViewError) {
+      window.bus.$emit("message", {
+        message: err.message,
+        type: "error"
+      });
+    }
+  },
   data () {
     return {
+      snackbar: {
+        background: null,
+        color: "pink",
+        active: false,
+        timeout: 5000,
+        message: "Hello"
+      },
       searchResults: [{a:1}],
       searchQuery: null,
       search: null,
@@ -157,7 +189,7 @@ export default {
 
       this.services = {}
 
-      container.get('$quartz.data').filter((module) => {
+      _.filter(container.get('$quartz.data'), (module) => {
         return module.route && module.route && parseInt(container.get('settings').get('app.services.menu.' + module.name))
       }).forEach((module) => {
         if (typeof this.services[module.tags[0]] === 'undefined') {
@@ -174,6 +206,20 @@ export default {
     }
   },
   created () {
+    window.bus.$on("message", data => {
+
+      if (data.type === 'error') {
+        this.snackbar.background = "error";
+        this.snackbar.color = "white";
+      } else {
+        this.snackbar.background = null;
+        this.snackbar.color = "pink";
+
+      }
+      this.snackbar.message = data.message;
+      this.snackbar.active = true;
+    });
+
     window.bus.$on('settings-user.update', () => {
       this.load();
       this.drawer = true;
