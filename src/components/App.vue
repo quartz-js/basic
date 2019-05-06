@@ -6,21 +6,21 @@
 
       <v-toolbar-title>{{ $root.config.app.name }}</v-toolbar-title>
 
-
-      <!--<v-autocomplete
+      <v-autocomplete
         class="mx-5 mt-2"
         flat
         append-icon=""
         prepend-inner-icon="search"
         clear-icon
-        v-model="searchQuery"
-        :items="searchResults"
-        :loading="searchLoading"
-        :search-input.sync="search"
-        hide-details
-        hide-selected
-        label="Ain't a great day to search something?"
+        item-text="title"
+        :items="search.items"
+        :loading="search.loading"
+        :search-input.sync="search.query"
+        label="Ain't a great day to search for something?"
         solo
+        ref="search"
+        hide-no-data
+        :menu-props="{closeOnContentClick:true}"
       >
         <template v-slot:no-data>
           <v-list-tile>
@@ -30,32 +30,30 @@
             </v-list-tile-title>
           </v-list-tile>
         </template>
-        <template v-slot:item="{ item }">
+        <template v-slot:item="{ item }" three-line>
 
-          <v-list-tile avatar>
+          <v-list-tile avatar  :to="item.url" >
             <v-list-tile-avatar>
-              <img src="http://192.168.1.5:8000/assets/amethyst/customer-icon.svg" alt="John">
+                <img :src="item.icon" alt="icon">
             </v-list-tile-avatar>
 
-            <v-list-tile-content>
-              <v-list-tile-title>Customer</v-list-tile-title>
-              <v-list-tile-sub-title>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer lobortis in arcu at pellentesque. </v-list-tile-sub-title>
+            <v-list-tile-content >
+              <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+              <v-list-tile-sub-title><div @click="closeSearch()">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer lobortis in arcu at pellentesque. Sed at porta odio. </div></v-list-tile-sub-title>
             </v-list-tile-content>
 
             <v-list-tile-action>
               <v-btn
-                :class="fav ? 'red--text' : ''"
+                :class="item.fav ? 'primary--text' : ''"
                 icon
-                @click="fav = !fav"
+                @click="item.fav = !item.fav"
               >
-                <v-icon>favorite</v-icon>
+                <v-icon>fas fa-cubes</v-icon>
               </v-btn>
             </v-list-tile-action>
           </v-list-tile>
         </template>
       </v-autocomplete>
-      -->
-
 
       <div class='fluid-fill'></div>
 
@@ -170,9 +168,12 @@ export default {
         timeout: 5000,
         message: "Hello"
       },
-      searchResults: [{a:1}],
-      searchQuery: null,
-      search: null,
+      search: {
+        loading: false,
+        items: [],
+        query: null,
+        sync: null
+      },
       isDark: false,
       drawer: parseInt(container.get('settings').get('app.sidebar', 0))
     }
@@ -182,9 +183,36 @@ export default {
       handler: function () {
         container.get('settings').store('app.sidebar', this.drawer)
       }
+    },
+    "search.query": {
+      handler: function(val) {
+        this.onUpdateSearch(val);
+      }
     }
   },
   methods: {
+    closeSearch() {
+      this.$refs.search.setMenuIndex(-1)
+    },
+    onUpdateSearch(val) {
+
+      if (!val) {
+        this.search.items = [];
+        return;
+      }
+
+      this.search.items = container.get('$quartz.view.services').map(service => {
+        return {
+          title: this.$t("$quartz.data." + service.config.label + ".name"),
+          icon: service.config.icon,
+          url: service.config.options.url,
+          fav: true
+        }
+      }).filter(item => {
+
+        return !val || item.title.toUpperCase().includes(val.toUpperCase());
+      }).slice(0, 5);
+    },
     load () {
 
       this.services = {}
@@ -199,6 +227,7 @@ export default {
         this.services[module.tags[0]].push(module)
       })
 
+      // this.onUpdateSearch(null);
     },
     logout () {
       container.get('oauth').logout()
@@ -261,8 +290,8 @@ export default {
   }
 
   .v-autocomplete__content.v-menu__content {
-    /*border: 2px solid #efefef;
+    border: 2px solid #efefef;
     box-shadow: none;
-    margin-top: 3px;*/
+    margin-top: 8px;
   }
 </style>

@@ -9,7 +9,7 @@ var routes = [
     children: [
       {
         path: '/',
-        redirect: { name: 'services' }
+        redirect: { name: 'dashboard' }
       },
       {
         path: 'dashboard',
