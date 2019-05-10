@@ -7,7 +7,7 @@
       <v-toolbar-title>{{ $root.config.app.name }}</v-toolbar-title>
 
       <v-autocomplete
-        class="mx-5 mt-2"
+        class="mx-5 mt-2 nav-search"
         flat
         append-icon=""
         prepend-inner-icon="search"
@@ -20,7 +20,7 @@
         solo
         ref="search"
         hide-no-data
-        :menu-props="{closeOnContentClick:true}"
+        :menu-props="{closeOnContentClick:true, 'v-bind:class':'hello', 'ref': 'ban'}"
       >
         <template v-slot:no-data>
           <v-list-tile>
@@ -261,7 +261,7 @@ export default {
 </script>
 
 <style lang="css">
-  .search {
+  .nav-search {
     margin-top: 3px
   }
 
@@ -292,6 +292,9 @@ export default {
   .v-autocomplete__content.v-menu__content {
     border: 2px solid #efefef;
     box-shadow: none;
-    margin-top: 8px;
+  }
+
+  .nav-search > .v-input__control {
+    min-height: 63px !important;
   }
 </style>
