@@ -273,9 +273,10 @@ export default {
     border-bottom: 1px solid #f1f1f1 !important;
     box-shadow: 1px 2px 4px 0 rgba(0,0,0,.03) !important;
   }
-  
+
   .toolbar.v-toolbar {
     background: white !important;
+    z-index: 4;
   }
 
   /*.v-list__tile--active {

@@ -16,17 +16,13 @@ export class VueServiceProvider extends ServiceProvider {
     Vue.config.productionTip = false
 
     Vue.use(QuartzCore) 
-
     Vue.use(VueLocalStorage)
-    console.log(Vue.options.components)
     Vue.use(VueI18n)
     window.bus = new Vue()
 
-    Vue.use(this.loadComponents);
+    console.log(this.loadComponents()(Vue));
 
     var router = container.get('$vue.router');
-
-
 
     var i18n = new VueI18n({
       locale: container.get('settings').get('language', 'en'),
@@ -53,9 +49,6 @@ export class VueServiceProvider extends ServiceProvider {
     })
 
     container.set("$vue.router", router)
-      
-
-    console.log(Vue.options.components)
 
     var v = new Vue({
       i18n: i18n,
