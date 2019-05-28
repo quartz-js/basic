@@ -20,9 +20,9 @@ export class VueServiceProvider extends ServiceProvider {
     Vue.use(VueI18n)
     window.bus = new Vue()
 
-    console.log(this.loadComponents()(Vue));
+    this.loadComponents()(Vue);
 
-    var router = container.get('$vue.router');
+    console.log(container.get('$quartz.lang'));
 
     var i18n = new VueI18n({
       locale: container.get('settings').get('language', 'en'),

@@ -16,7 +16,7 @@
         :items="search.items"
         :loading="search.loading"
         :search-input.sync="search.query"
-        label="Ain't a great day to search for something?"
+        :label="$t('$quartz.basic.search')"
         solo
         ref="search"
         hide-no-data
@@ -103,13 +103,12 @@
       <v-divider :dark="false"></v-divider>
 
       <v-list v-if="services">
-        <div v-for="(tag, index) in services" :key="index">
-          <v-list-tile  :to="{name: service.route.name}" v-for="(service, index) in tag" :key="index">
-            <v-list-tile-content>
-              <v-list-tile-title>{{ $t("$quartz.data." + service.name + ".name") }}</v-list-tile-title>
-            </v-list-tile-content>
-          </v-list-tile>
-        </div>
+        <v-list-tile v-for="(service, index) in services" :to="service.config.options.url" :key="index">
+          <v-list-tile-content>
+            <v-list-tile-title>{{ $t("$quartz.data." + service.config.label + ".name") }}</v-list-tile-title>
+            
+          </v-list-tile-content>
+        </v-list-tile>
       </v-list>
     </v-navigation-drawer>
 
@@ -214,17 +213,8 @@ export default {
       }).slice(0, 5);
     },
     load () {
-
-      this.services = {}
-
-      _.filter(container.get('$quartz.data'), (module) => {
-        return module.route && module.route && parseInt(container.get('settings').get('app.services.menu.' + module.name))
-      }).forEach((module) => {
-        if (typeof this.services[module.tags[0]] === 'undefined') {
-          this.services[module.tags[0]] = []
-        }
-
-        this.services[module.tags[0]].push(module)
+      this.services = _.filter(container.get('$quartz.view.services'), (module) => {
+        return module.config.options.url && parseInt(container.get('settings').get('app.services.menu.' + module.name))
       })
 
       // this.onUpdateSearch(null);
@@ -261,6 +251,7 @@ export default {
 </script>
 
 <style lang="css">
+
   .nav-search {
     margin-top: 3px
   }
@@ -276,7 +267,6 @@ export default {
 
   .toolbar.v-toolbar {
     background: white !important;
-    z-index: 4;
   }
 
   /*.v-list__tile--active {

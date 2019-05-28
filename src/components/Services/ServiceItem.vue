@@ -1,11 +1,11 @@
 <template>
   <div v-if="showSection()">
-    <v-subheader class="title">{{ $t('$quartz.tags.' + tag) }}</v-subheader>
-    <v-divider></v-divider>
+    <!--<v-subheader class="title">{{ $t('$quartz.tags.' + tag) }}</v-subheader>
+    <v-divider></v-divider>-->
     <v-list three-line class="list-main">
       <v-list-tile v-for="(service, index) in services" :key="index" class="item" :class="{'disabled': !canShow(service) }" v-if="showHidden || canShow(service)" >
         <router-link :to="service.config.options.url">
-          <v-list-tile-avatar :size="90" tile class='pt-2' >
+          <v-list-tile-avatar :size="70" tile class='pt-2' >
             <img :src="service.config.icon">
             
           </v-list-tile-avatar>
@@ -15,8 +15,8 @@
           <v-list-tile-title>
             <router-link :to="service.config.options.url">{{ $t("$quartz.data." + service.config.label + ".name") }}</router-link>
           </v-list-tile-title>
-          <v-list-tile-sub-title>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer lobortis in arcu at pellentesque. Sed at porta odio. Vivamus sollicitudin euismod justo id ornare. Suspendisse a metus orci. Cras tempor finibus metus, nec dictum enim sollicitudin sit amet. Vestibulum et suscipit lacus. Nam vestibulum tempus dolor.
+          <v-list-tile-sub-title style='font-size:12px'>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer lobortis in arcu at pellentesque. Integer lobortis in arcu at pellentesque. Integer lobortis in arcu at pellentesque.
 
             <!--{{ $t("$quartz.data." + service.name + ".description") }}-->
           </v-list-tile-sub-title>
@@ -95,15 +95,15 @@ export default {
 
   .item .v-list__tile .v-list__tile__action {
     cursor: pointer;
-    padding: 10px;
     opacity: 0.6;
     align-items: flex-start;
-    margin-left: -50px;
-    margin-top: -15px;
+    margin-left: -20px;
+    margin-top: 8px;
+    min-width: 0;
   }
 
   .item{
-    width: 50%;
+    width: 33%;
   }
 
   .disabled {

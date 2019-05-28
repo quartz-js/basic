@@ -12,6 +12,8 @@
       "logout": "Disconnettiti"
     },
     "basic": {
+      "services": "Servizi",
+      "search": "Non è una bella giornata per cercare qualcosa?",
       "show-disabled": "Mostra elementi disattivati",
       "hide-disabled": "Nascondi elementi disattivati",
       "show": "Mostra",

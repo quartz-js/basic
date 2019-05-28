@@ -12,6 +12,8 @@
       "logout": "Logout"
     },
     "basic": {
+      "services": "Services",
+      "search": "Ain't a great day to search for something?",
       "show-disabled": "Show Disabled",
       "hide-disabled": "Hide Disabled",
       "show": "Show",
