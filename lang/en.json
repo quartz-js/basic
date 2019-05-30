@@ -13,11 +13,12 @@
     },
     "basic": {
       "services": "Services",
+      "show-all": "Show all",
       "search": "Ain't a great day to search for something?",
       "show-disabled": "Show Disabled",
       "hide-disabled": "Hide Disabled",
-      "show": "Show",
-      "hide": "Hide",
+      "remove": "Dashboard - Remove",
+      "add": "Dashboard - Add",
       "nav-add": "Sidebar - Add",
       "nav-remove": "Sidebar - Remove"
     }

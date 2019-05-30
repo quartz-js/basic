@@ -3,7 +3,7 @@
     <!--<v-subheader class="title">{{ $t('$quartz.tags.' + tag) }}</v-subheader>
     <v-divider></v-divider>-->
     <v-list three-line class="list-main">
-      <v-list-tile v-for="(service, index) in services" :key="index" class="item" :class="{'disabled': !canShow(service) }" v-if="showHidden || canShow(service)" >
+      <v-list-tile v-for="(service, index) in services" :key="index" class="item">
         <router-link :to="service.config.options.url">
           <v-list-tile-avatar :size="70" tile class='pt-2' >
             <img :src="service.config.icon">
@@ -32,7 +32,7 @@
                 <v-list-tile-title>{{ hasMenu(service) ? $t("$quartz.basic.nav-remove") : $t("$quartz.basic.nav-add") }}</v-list-tile-title>
               </v-list-tile>
               <v-list-tile @click="toggleShow(service)">
-                <v-list-tile-title>{{ canShow(service) ? $t("$quartz.basic.hide") : $t("$quartz.basic.show")  }}</v-list-tile-title>
+                <v-list-tile-title>{{ canShow(service) ? $t("$quartz.basic.remove") : $t("$quartz.basic.add")  }}</v-list-tile-title>
               </v-list-tile>
             </v-list>
           </v-menu>
@@ -51,22 +51,19 @@ export default {
   props: ['services', 'showHidden', 'tag'],
   methods: {
     showSection() {
-      return this.showHidden || this.services.find((service) => { return this.canShow(service) }) !== undefined
+      return true;
     },
     toggleMenu (service) {
-      container.get('settings').store('app.services.menu.' + service.name, !parseInt(container.get('settings').get('app.services.menu.' + service.name, 0)) ? 1 : 0)
+      container.get('settings').toggle('app.services.menu.' + service.name, 0)
       this.$forceUpdate()
       window.bus.$emit('settings-user.update');
     },
     toggleShow (service) {
-      container.get('settings').store('app.services.show.' + service.name, !parseInt(container.get('settings').get('app.services.show.' + service.name, this.getDefaultValueService(service))) ? 1 : 0)
+      container.get('settings').toggle('app.services.show.' + service.name, 0);
       this.$forceUpdate()
     },
-    getDefaultValueService (service) {
-      return service.priority > 0 ? 1 : 0
-    },
     canShow (service) {
-      return parseInt(container.get('settings').get('app.services.show.' + service.name, this.getDefaultValueService(service)))
+      return parseInt(container.get('settings').get('app.services.show.' + service.name, 0))
     },
     hasMenu (service) {
       return parseInt(container.get('settings').get('app.services.menu.' + service.name, 0))
@@ -113,6 +110,6 @@ export default {
   .item .v-list__tile__sub-title {
     line-clamp: 3;
     -webkit-line-clamp: 3;
-    max-height: 63px;
+    max-height: 55px;
   }
 </style>

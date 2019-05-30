@@ -1,46 +1,47 @@
 <template>
   <div>
-    <v-card class="mt-4 resource-card">
-      <v-card-title>
-        <div>
-          <h3 class="headline mb-0">Hello there</h3>
-          <p>It seems you have reached the dashboard, unfortunately there is nothing here.</p>
-        </div>
-      </v-card-title>
-    </v-card>
-
     <div class='mt-3'>
+      <v-layout row wrap class="" style='margin: 0 -15px'>
+        <v-flex xs4>
+          <v-card class="pa-3 ma-3 resource-card">
+            <apexchart :options="chartOptions1" :series="series1" height='150'></apexchart>
+          </v-card>
+        </v-flex>
 
-        <v-layout row wrap class="" style='margin: 0 -15px'>
-          <v-flex xs4>
-            <v-card class="pa-3 ma-3 resource-card">
-              <apexchart :options="chartOptions1" :series="series1" height='150'></apexchart>
-            </v-card>
-          </v-flex>
+        <v-flex xs4>
+          <v-card class="pa-3 ma-3 resource-card">
+            <apexchart :options="chartOptions1" :series="series1" height='150'></apexchart>
+          </v-card>
+        </v-flex>
 
-          <v-flex xs4>
-            <v-card class="pa-3 ma-3 resource-card">
-              <apexchart :options="chartOptions1" :series="series1" height='150'></apexchart>
-            </v-card>
-          </v-flex>
+        <v-flex xs4>
+          <v-card class="pa-3 ma-3 resource-card">
+            <apexchart :options="chartOptions1" :series="series1" height='150'></apexchart>
+          </v-card>
+        </v-flex>
 
-          <v-flex xs4>
-            <v-card class="pa-3 ma-3 resource-card">
-              <apexchart :options="chartOptions1" :series="series1" height='150'></apexchart>
-            </v-card>
-          </v-flex>
+        <v-flex xs6>
+          <v-card class="pa-3 ma-3 resource-card">
+            <apexchart type="bar" height='400' :options="chartOptions" :series="series"></apexchart>
+          </v-card>
+        </v-flex>
+        <v-flex xs6>
+          <v-card class="pa-3 ma-3 resource-card">
+            <apexchart type="donut" height='400' :options="pie.options" :series="pie.series"></apexchart>
+          </v-card>
+        </v-flex>
+      </v-layout>
+    </div>
 
-          <v-flex xs6>
-            <v-card class="pa-3 ma-3 resource-card">
-              <apexchart type="bar" height='400' :options="chartOptions" :series="series"></apexchart>
-            </v-card>
-          </v-flex>
-          <v-flex xs6>
-            <v-card class="pa-3 ma-3 resource-card">
-              <apexchart type="donut" height='400' :options="pie.options" :series="pie.series"></apexchart>
-            </v-card>
-          </v-flex>
-        </v-layout>
+    <div>
+      <v-card flat class="resource-card my-3">
+        <v-subheader class="title">{{ $t('$quartz.basic.services') }}</v-subheader>
+        <v-divider></v-divider>
+        <service-item  :services="retrieveServices()"></service-item>
+        <div class='text-xs-right pa-3'>
+          <router-link :to="{name: 'services' }">{{ $t('$quartz.basic.show-all') }}</router-link>
+        </div>
+      </v-card>
     </div>
   </div>
 </template>
@@ -48,14 +49,20 @@
 
 import VueApexCharts from 'vue-apexcharts'
 import Vue from 'vue'
+import { container } from '@railken/quartz-core'
+import ServiceItem from './Services/ServiceItem'
 
 Vue.use(VueApexCharts)
 Vue.component('apexchart', VueApexCharts)
 
 
 export default {
+  components: {
+    ServiceItem,
+  },
   data: function() {
     return {
+      services: [],
       sparklineData: [47, 45, 54, 38, 56, 24, 65, 31, 37, 39, 62, 51, 35, 41, 35, 27, 93, 53, 61, 27, 54, 43, 19, 46],
       series: [],
       series1: [],
@@ -142,6 +149,16 @@ export default {
   },
   methods: {
 
+    canShow (service) {
+      return parseInt(container.get('settings').get('app.services.show.' + service.name, 0))
+    },
+    retrieveServices () {
+      return container.get('$quartz.view.services').filter((val) => {
+        return this.canShow(val);
+      }).sort((a, b) => {
+        return a.name > b.name;
+      })
+    },
     randomizeArray (arg) {
       var array = arg.slice();
       var currentIndex = array.length,

@@ -13,11 +13,12 @@
     },
     "basic": {
       "services": "Servizi",
+      "show-all": "Mostra tutti",
       "search": "Non è una bella giornata per cercare qualcosa?",
       "show-disabled": "Mostra elementi disattivati",
       "hide-disabled": "Nascondi elementi disattivati",
-      "show": "Mostra",
-      "hide": "Nascondi",
+      "remove": "Dashboard - Rimuovi",
+      "add": "Dashboard - Aggiungi",
       "nav-add": "Sidebar - Aggiungi",
       "nav-remove": "Sidebar - Rimuovi"
     }

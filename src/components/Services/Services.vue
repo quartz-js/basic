@@ -1,13 +1,10 @@
 <template>
   <div>
-    <v-card flat class="resource-card mt-5">
+    <v-card flat class="resource-card my-5">
       <v-subheader class="title">{{ $t('$quartz.basic.services') }}</v-subheader>
       <v-divider></v-divider>
       <div v-for="(tag, index) in tags" :key="index">
         <service-item :tag="tag" :services="retrieveServices(tag)" :show-hidden="showHidden"></service-item>
-      </div>
-      <div class='text-xs-right mt-5'>
-        <a href="javascript:;" @click="showHidden = !showHidden">{{ !showHidden ? $t('$quartz.basic.show-disabled') : $t('$quartz.basic.hide-disabled')}}</a>
       </div>
     </v-card>
   </div>
@@ -34,6 +31,8 @@ export default {
     retrieveServices (tag) {
       return this.services.filter((val) => {
         return val.tags && val.tags.indexOf(tag) !== -1 && val.config.label && val.config.options.url
+      }).sort((a, b) => {
+        return a.name > b.name;
       })
     },
   },
