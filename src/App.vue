@@ -7,10 +7,6 @@
 </template>
 <script>
 
-require('./assets/main.styl')
-require('./assets/main.css')
-require('./assets/fluid.css')
-
 export default {
   name: 'app',
   data () {

@@ -13,10 +13,6 @@ table {
 }
 
 body{
-  color: #5b5b5b;
-  margin:0;
-  font-size:14px;
-  color: #54545b;
   margin:0;
   font-size:12px;
   font-family: "Montserrat" , sans-serif;
@@ -30,6 +26,10 @@ body{
 
 .hide{
   display:none;
+}
+
+.hidden{
+  visibility: hidden;
 }
 
 .disable{
@@ -74,38 +74,9 @@ iframe html,body{
 }
 
 html {
-  overflow-y: auto;
+  overflow-y: auto !important;
 }
+
 a {
   text-decoration: none;
-}
-
-.resource-card {
-  box-shadow: none !important;
-  border: 2px solid #f1f1f1 !important;
-}
-
-.v-card {
-}
-.v-btn {
-    box-shadow: none !important;
-}
-
-.theme--light.v-table tbody tr:not(:last-child), .theme--light.v-table thead tr:first-child {
-  border-bottom: 2px solid #f1f1f1 !important;
-}
-
-.theme--light.v-datatable .v-datatable__actions {
-  border-top: 2px solid #f1f1f1 !important;
-}
-
-.v-navigation-drawer .v-list__tile--active {
-  background: #083c8c;
-}
-
-.v-navigation-drawer .v-list__tile__content, .v-navigation-drawer .v-list__tile__action {
-  color: white
-}
-.v-messages__message {
-  line-height: 1.3;
 }

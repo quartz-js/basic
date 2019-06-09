@@ -36,19 +36,35 @@ export class VueServiceProvider extends ServiceProvider {
       }
     })
 
+    let routes = container.get('$vue.routes').map(item => {
+      if (item.name === 'app') {
+        item.component = () => import ('../../components/Applications/' + container.get('$quartz.theme', 'Default'));
+      }
+
+
+      return item
+    })
+
+    console.log(routes)
+
+    console.log(routes.filter(route => {
+      return route.name === 'app'
+    }).component);
+
     Vue.use(Router)
 
     var router = new Router({
       scrollBehavior () {
         return { x: 0, y: 0 }
       },
-      routes: container.get('$vue.routes'),
+      routes: routes,
       hashbang: false,
       history: true,
       mode: 'history'
     })
 
     container.set("$vue.router", router)
+
 
     var v = new Vue({
       i18n: i18n,

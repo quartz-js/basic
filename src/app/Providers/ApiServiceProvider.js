@@ -14,10 +14,8 @@ export class ApiServiceProvider extends ServiceProvider {
 
     return api.index({}).then(response => {
       container.set('api.index', response.body.app);
-      container.set('app.events', response.body.app.events.map(val => {
-        return {value: val, label: val}
-      }))
-
+    }).catch(response => {
+      alert('Cannot contact API');
     })
   }
 }
