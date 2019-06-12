@@ -10,7 +10,7 @@
       <div style='border-left: 2px solid #efefef; height: 36px; margin-right: 10px; margin-left: 10px'></div>
       <avatar :user="user"/>
     </v-toolbar>
-    <v-navigation-drawer v-model='drawer' fixed app dark>
+    <v-navigation-drawer v-model='drawer' fixed app dark class="navigation">
       <v-list>
         <v-list-tile to="/dashboard">
           <v-list-tile-action>
