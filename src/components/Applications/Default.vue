@@ -59,7 +59,10 @@ export default {
   watch: {
     drawer: {
       handler: function () {
-        container.get('settings').store('app.sidebar', this.drawer)
+
+        if (this.getDrawerSettingValue() != this.drawer) {
+          container.get('settings').store('app.sidebar', this.drawer)
+        }
       }
     },
   },
@@ -80,7 +83,7 @@ export default {
   data () {
     return {
       isDark: false,
-      drawer: parseInt(container.get('settings').get('app.sidebar', 0)),
+      drawer: null,
       services: []
     }
   },
@@ -89,12 +92,18 @@ export default {
       this.services = _.filter(container.get('$quartz.view.services'), (module) => {
         return module.config.options.url && parseInt(container.get('settings').get('app.services.menu.' + module.name))
       })
+    },
+    getDrawerSettingValue()
+    {
+      let val = container.get('settings').get('app.sidebar', 0);
+      return val === true || parseInt(val) === 1 ? true : false;
     }
   },
   mounted () {
-    this.drawer = this.status;
   },
   created() {
+
+    this.drawer = this.getDrawerSettingValue();
 
     this.load();
 
