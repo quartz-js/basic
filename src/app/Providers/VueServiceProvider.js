@@ -22,8 +22,6 @@ export class VueServiceProvider extends ServiceProvider {
 
     this.loadComponents()(Vue);
 
-    console.log(container.get('$quartz.lang'));
-
     var i18n = new VueI18n({
       locale: container.get('settings').get('language', 'en'),
       silentTranslationWarn: false,
@@ -44,12 +42,6 @@ export class VueServiceProvider extends ServiceProvider {
 
       return item
     })
-
-    console.log(routes)
-
-    console.log(routes.filter(route => {
-      return route.name === 'app'
-    }).component);
 
     Vue.use(Router)
 
@@ -82,8 +74,6 @@ export class VueServiceProvider extends ServiceProvider {
         }
       }
     }).$mount('#app')
-
-
 
     container.set('$vue.app', v);
   }
