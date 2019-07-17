@@ -1,6 +1,6 @@
-import { ServiceProvider } from '@railken/quartz-core'
+import { ServiceProvider } from '@quartz/core'
 import Echo from 'laravel-echo'
-import { container } from '@railken/quartz-core'
+import { container } from '@quartz/core'
 import Notifications from 'vue-notification'
 import Vue from 'vue'
 

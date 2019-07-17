@@ -49,7 +49,7 @@
 
 import VueApexCharts from 'vue-apexcharts'
 import Vue from 'vue'
-import { container } from '@railken/quartz-core'
+import { container } from '@quartz/core'
 import ServiceItem from './Services/ServiceItem'
 
 Vue.use(VueApexCharts)

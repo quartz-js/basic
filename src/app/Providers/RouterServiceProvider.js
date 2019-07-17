@@ -1,6 +1,6 @@
-import { ServiceProvider } from '@railken/quartz-core'
+import { ServiceProvider } from '@quartz/core'
 
-import { container } from '@railken/quartz-core'
+import { container } from '@quartz/core'
 import Vue from 'vue'
 
 export class RouterServiceProvider extends ServiceProvider {

@@ -44,7 +44,7 @@
 <script>
 require('../../assets/styles/default.styl')
 
-import { container } from '@railken/quartz-core'
+import { container } from '@quartz/core'
 import NotificationIcon from '@railken/quartz/notification/src/components/notification/notification-icon'
 import { DataViewError } from '@railken/quartz/data-view/src/app/Errors/DataViewError'
 import store from 'store2'

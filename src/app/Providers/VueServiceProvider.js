@@ -1,11 +1,11 @@
-import { ServiceProvider } from '@railken/quartz-core'
+import { ServiceProvider } from '@quartz/core'
 
-import { container } from '@railken/quartz-core'
+import { container } from '@quartz/core'
 import VueLocalStorage from 'vue-localstorage'
 import Vue from 'vue'
 import Vuetify from 'vuetify'
 import VueI18n from 'vue-i18n'
-import QuartzCore from '@railken/quartz-core'
+import QuartzCore from '@quartz/core'
 import App from '@/App'
 import Router from 'vue-router'
 
@@ -21,8 +21,6 @@ export class VueServiceProvider extends ServiceProvider {
     window.bus = new Vue()
 
     this.loadComponents()(Vue);
-
-    console.log(container.get('$quartz.lang'));
 
     var i18n = new VueI18n({
       locale: container.get('settings').get('language', 'en'),
@@ -44,12 +42,6 @@ export class VueServiceProvider extends ServiceProvider {
 
       return item
     })
-
-    console.log(routes)
-
-    console.log(routes.filter(route => {
-      return route.name === 'app'
-    }).component);
 
     Vue.use(Router)
 

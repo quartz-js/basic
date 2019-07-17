@@ -1,7 +1,7 @@
-import { ServiceProvider } from '@railken/quartz-core'
+import { ServiceProvider } from '@quartz/core'
 
 import { IndexApi } from '../Api/IndexApi.js'
-import { container } from '@railken/quartz-core'
+import { container } from '@quartz/core'
 import VueResource from 'vue-resource'
 import Vue from 'vue'
 
