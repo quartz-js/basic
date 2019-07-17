@@ -1,4 +1,4 @@
-import Guard from '@railken/quartz/auth/src/app/Middlewares/Guard'
+import Guard from '@quartz/auth/src/app/Middlewares/Guard'
 
 var routes = [
   {
