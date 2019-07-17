@@ -75,8 +75,6 @@ export class VueServiceProvider extends ServiceProvider {
       }
     }).$mount('#app')
 
-
-
     container.set('$vue.app', v);
   }
 }
