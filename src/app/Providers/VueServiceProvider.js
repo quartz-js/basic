@@ -75,6 +75,7 @@ export class VueServiceProvider extends ServiceProvider {
       }
     }).$mount('#app')
 
+    container.set('translator', v._i18n)
     container.set('$vue.app', v);
   }
 }
