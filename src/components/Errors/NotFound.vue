@@ -1,9 +1,7 @@
 <template>
-  <v-app>
-    <v-content>
-        <h1 class='display-3'>Page not found</h1>
-    </v-content>
-  </v-app>
+  <v-content>
+    <h1 class='display-3'>Page not found</h1>
+  </v-content>
 </template>
 <style scoped>
   .v-content {

@@ -1,37 +1,36 @@
 <template>
-  <v-app v-if="user" :dark="isDark" style=''>
-    <v-toolbar class="toolbar" app>
-      <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
+  <v-app v-if="user" v-bind:style="{ background: $vuetify.theme.themes.light.background }">
+    <v-app-bar app class="toolbar" v-bind:style="{ background: $vuetify.theme.themes.light.header }">
+      <v-app-bar-nav-icon @click.stop="drawer = !drawer" small class='mx-1'></v-app-bar-nav-icon>
       <v-toolbar-title>{{ $root.config.app.name }}</v-toolbar-title>
       <searcher />
       <div class='fluid-fill'></div>
-      <v-btn icon :to="{'name': 'services'}" class='mx-2'><v-icon>fas fa-cubes</v-icon></v-btn>
+      <v-btn icon :to="{'name': 'services'}" class='mx-3' small><v-icon>fas fa-cubes</v-icon></v-btn>
       <notification-icon :user="user"/>
       <div style='border-left: 2px solid #efefef; height: 36px; margin-right: 10px; margin-left: 10px'></div>
       <avatar :user="user"/>
-    </v-toolbar>
-    <v-navigation-drawer v-model='drawer' fixed app dark class="navigation">
+    </v-app-bar>
+    <q-sidebar v-model='drawer' app class="navigation">
       <v-list>
-        <v-list-tile to="/dashboard">
-          <v-list-tile-action>
+        <v-list-item to="/dashboard" :color="$container.get('style.sidebar.itemColorActive')">
+          <v-list-item-action>
             <v-icon>dashboard</v-icon>
-          </v-list-tile-action>
-          <v-list-tile-content>
-            <v-list-tile-title>Dashboard</v-list-tile-title>
-          </v-list-tile-content>
-        </v-list-tile>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>Dashboard</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
       </v-list>
 
-      <v-divider :dark="false"></v-divider>
 
       <v-list v-if="services">
-        <v-list-tile v-for="(service, index) in services" :to="service.config.options.url" :key="index">
-          <v-list-tile-content>
-            <v-list-tile-title>{{ $t("$quartz.data." + service.config.label + ".name") }}</v-list-tile-title>
-          </v-list-tile-content>
-        </v-list-tile>
+        <v-list-item v-for="(service, index) in services" :to="service.config.options.url" :key="index" :color="$container.get('style.sidebar.itemColorActive')">
+          <v-list-item-content>
+            <v-list-item-title>{{ $t("$quartz.data." + service.config.label + ".name") }}</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
       </v-list>
-    </v-navigation-drawer>
+    </q-sidebar>
     <snackbar />
     <v-content>
       <v-container style='padding: 0; max-width: 1400px'>
@@ -42,16 +41,17 @@
 </template>
 
 <script>
-require('../../assets/styles/default.styl')
+require('../assets/styles/default.scss')
+
 
 import { container } from '@quartz/core'
 import NotificationIcon from '@quartz/notification/src/components/notification/notification-icon'
 import { DataViewError } from '@quartz/data-view/src/app/Errors/DataViewError'
 import store from 'store2'
-import Snackbar from '../Snackbar'
+import Snackbar from './Snackbar'
 import _ from 'lodash'
-import Searcher from '../Searcher'
-import Avatar from '../Avatar'
+import Searcher from './Searcher'
+import Avatar from './Avatar'
 
 
 export default {
@@ -59,7 +59,6 @@ export default {
   watch: {
     drawer: {
       handler: function () {
-
         if (this.getDrawerSettingValue() != this.drawer) {
           container.get('settings').store('app.sidebar', this.drawer)
         }
@@ -107,7 +106,7 @@ export default {
 
     this.load();
 
-    window.bus.$on('settings-user.update', () => {
+    window.bus.$on('component.update', () => {
       this.load();
       this.drawer = true;
       this.$forceUpdate();
@@ -115,3 +114,10 @@ export default {
   }
 }
 </script>
+<style scoped>
+
+.theme--light.v-btn.v-btn--icon {
+    color: rgba(0, 0, 0, 0.84);
+}
+
+</style>

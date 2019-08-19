@@ -7,7 +7,7 @@
     {{ message }}
     <v-btn
       :color="color"
-      flat
+      text
       @click="active = false"
     >
       Close

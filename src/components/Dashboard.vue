@@ -3,45 +3,45 @@
     <div class='mt-3'>
       <v-layout row wrap class="" style='margin: 0 -15px'>
         <v-flex xs4>
-          <v-card class="pa-3 ma-3 resource-card">
+          <q-card class="pa-3 ma-3 ">
             <apexchart :options="chartOptions1" :series="series1" height='150'></apexchart>
-          </v-card>
+          </q-card>
         </v-flex>
 
         <v-flex xs4>
-          <v-card class="pa-3 ma-3 resource-card">
+          <q-card class="pa-3 ma-3 ">
             <apexchart :options="chartOptions1" :series="series1" height='150'></apexchart>
-          </v-card>
+          </q-card>
         </v-flex>
 
         <v-flex xs4>
-          <v-card class="pa-3 ma-3 resource-card">
+          <q-card class="pa-3 ma-3 ">
             <apexchart :options="chartOptions1" :series="series1" height='150'></apexchart>
-          </v-card>
+          </q-card>
         </v-flex>
 
         <v-flex xs6>
-          <v-card class="pa-3 ma-3 resource-card">
+          <q-card class="pa-3 ma-3 ">
             <apexchart type="bar" height='400' :options="chartOptions" :series="series"></apexchart>
-          </v-card>
+          </q-card>
         </v-flex>
         <v-flex xs6>
-          <v-card class="pa-3 ma-3 resource-card">
+          <q-card class="pa-3 ma-3 ">
             <apexchart type="donut" height='400' :options="pie.options" :series="pie.series"></apexchart>
-          </v-card>
+          </q-card>
         </v-flex>
       </v-layout>
     </div>
 
     <div>
-      <v-card flat class="resource-card my-3">
+      <q-card flat class="my-3">
         <v-subheader class="title">{{ $t('$quartz.basic.services') }}</v-subheader>
         <v-divider></v-divider>
         <service-item  :services="retrieveServices()"></service-item>
-        <div class='text-xs-right pa-3'>
+        <div class='text-right pa-3'>
           <router-link :to="{name: 'services' }">{{ $t('$quartz.basic.show-all') }}</router-link>
         </div>
-      </v-card>
+      </q-card>
     </div>
   </div>
 </template>

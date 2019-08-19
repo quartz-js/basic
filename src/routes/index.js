@@ -4,6 +4,7 @@ var routes = [
   {
     name: 'app',
     path: '/',
+    component: () => import('../components/Application'),
     beforeEnter: Guard.auth,
     children: [
       {

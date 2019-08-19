@@ -3,11 +3,12 @@ import { ServiceProvider } from '@quartz/core'
 import { container } from '@quartz/core'
 import VueLocalStorage from 'vue-localstorage'
 import Vue from 'vue'
-import Vuetify from 'vuetify'
+import Vuetify from 'vuetify/lib'
 import VueI18n from 'vue-i18n'
 import QuartzCore from '@quartz/core'
 import App from '@/App'
 import Router from 'vue-router'
+import { StyleService } from '@quartz/style/src/app/StyleService'
 
 export class VueServiceProvider extends ServiceProvider {
 
@@ -28,20 +29,19 @@ export class VueServiceProvider extends ServiceProvider {
       messages: container.get('$quartz.lang')
     });
 
-    Vue.use(Vuetify, {
+    Vue.use(Vuetify)
+
+    let vuetify = new Vuetify({
+      theme: StyleService.getTheme()
+    })
+
+    /*Vue.use(Vuetify, {
       lang: {
         t: (key, ...params) => i18n.t(key, params)
       }
-    })
+    })*/
 
-    let routes = container.get('$vue.routes').map(item => {
-      if (item.name === 'app') {
-        item.component = () => import ('../../components/Applications/' + container.get('$quartz.theme', 'Default'));
-      }
-
-
-      return item
-    })
+    let routes = container.get('$vue.routes')
 
     Vue.use(Router)
 
@@ -59,6 +59,7 @@ export class VueServiceProvider extends ServiceProvider {
 
 
     var v = new Vue({
+      vuetify,
       i18n: i18n,
       router,
       template: '<App/>',

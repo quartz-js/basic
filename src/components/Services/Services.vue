@@ -1,12 +1,12 @@
 <template>
   <div>
-    <v-card flat class="resource-card my-5">
+    <q-card flat class="my-5">
       <v-subheader class="title">{{ $t('$quartz.basic.services') }}</v-subheader>
       <v-divider></v-divider>
       <div v-for="(tag, index) in tags" :key="index">
         <service-item :tag="tag" :services="retrieveServices(tag)" :show-hidden="showHidden"></service-item>
       </div>
-    </v-card>
+    </q-card>
   </div>
 </template>
 
@@ -42,7 +42,7 @@ export default {
 }
 </script>
 <style scoped>
-  .v-card {
+  .q-card{
     padding: 30px 50px;
   }
 </style>

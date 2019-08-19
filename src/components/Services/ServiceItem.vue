@@ -3,41 +3,39 @@
     <!--<v-subheader class="title">{{ $t('$quartz.tags.' + tag) }}</v-subheader>
     <v-divider></v-divider>-->
     <v-list three-line class="list-main">
-      <v-list-tile v-for="(service, index) in services" :key="index" class="item">
+      <v-list-item v-for="(service, index) in services" :key="index" class="item my-2">
         <router-link :to="service.config.options.url">
-          <v-list-tile-avatar :size="70" tile class='pt-2' >
+          <v-list-item-avatar :size="70" tile class='ma-0 mr-6' >
             <img :src="service.config.icon">
-            
-          </v-list-tile-avatar>
+          </v-list-item-avatar>
         </router-link>
 
-        <v-list-tile-content class="pl-4">
-          <v-list-tile-title>
-            <router-link :to="service.config.options.url">{{ $t("$quartz.data." + service.config.label + ".name") }}</router-link>
-          </v-list-tile-title>
-          <v-list-tile-sub-title style='font-size:12px'>
+        <v-list-item-content class="pa-0 align-start">
+          <v-list-item-title class="ma-0" style='display: flex'>
+            <router-link :to="service.config.options.url" style='flex-grow: 1'>{{ $t("$quartz.data." + service.config.label + ".name") }}</router-link>
+            <v-menu offset-y>
+              <template v-slot:activator="{ on }">
+                <v-btn v-on="on" icon small text class="ma-0" height='24' width='24'>
+                  <v-icon accent>more_horiz</v-icon>
+                </v-btn>
+              </template>
+              <v-list>
+                <v-list-item @click="toggleMenu(service)">
+                  <v-list-item-title>{{ hasMenu(service) ? $t("$quartz.basic.nav-remove") : $t("$quartz.basic.nav-add") }}</v-list-item-title>
+                </v-list-item>
+                <v-list-item @click="toggleShow(service)">
+                  <v-list-item-title>{{ canShow(service) ? $t("$quartz.basic.remove") : $t("$quartz.basic.add")  }}</v-list-item-title>
+                </v-list-item>
+              </v-list>
+            </v-menu>
+          </v-list-item-title>
+          <v-list-item-subtitle style='font-size:12px'>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer lobortis in arcu at pellentesque. Integer lobortis in arcu at pellentesque. Integer lobortis in arcu at pellentesque.
 
             <!--{{ $t("$quartz.data." + service.name + ".description") }}-->
-          </v-list-tile-sub-title>
-        </v-list-tile-content>
-
-        <v-list-tile-action>
-          <v-menu offset-y>
-            <v-btn slot="activator" icon>
-              <v-icon accent>more_horiz</v-icon>
-            </v-btn>
-            <v-list>
-              <v-list-tile @click="toggleMenu(service)">
-                <v-list-tile-title>{{ hasMenu(service) ? $t("$quartz.basic.nav-remove") : $t("$quartz.basic.nav-add") }}</v-list-tile-title>
-              </v-list-tile>
-              <v-list-tile @click="toggleShow(service)">
-                <v-list-tile-title>{{ canShow(service) ? $t("$quartz.basic.remove") : $t("$quartz.basic.add")  }}</v-list-tile-title>
-              </v-list-tile>
-            </v-list>
-          </v-menu>
-        </v-list-tile-action>
-      </v-list-tile>
+          </v-list-item-subtitle>
+        </v-list-item-content>
+      </v-list-item>
     </v-list>
   </div>
 </template>
@@ -56,7 +54,7 @@ export default {
     toggleMenu (service) {
       container.get('settings').toggle('app.services.menu.' + service.name, 0)
       this.$forceUpdate()
-      window.bus.$emit('settings-user.update');
+      window.bus.$emit('component.update');
     },
     toggleShow (service) {
       container.get('settings').toggle('app.services.show.' + service.name, 0);
@@ -72,6 +70,11 @@ export default {
 }
 </script>
 <style style='scss' scoped>
+
+  .v-list-item__content {
+    align-self: center;
+  }
+
   .list-main {
     display: flex;
     flex-wrap: wrap;
@@ -82,32 +85,38 @@ export default {
     top: -8px;
   }
 
-  .item .v-list__tile__avatar { 
+  .item .v-list-item__avatar { 
     min-width: auto !important;
     margin-top: 0 !important;
   }
   .item {
-    height: 114px !important;
+    max-height: 75px
   }
 
-  .item .v-list__tile .v-list__tile__action {
+  .v-list-item__action {
     cursor: pointer;
     opacity: 0.6;
     align-items: flex-start;
     margin-left: -20px;
     margin-top: 8px;
     min-width: 0;
+    max-width: 0;
+  }
+
+  .v-list-item {
+    padding: 0 10px;
   }
 
   .item{
     width: 33%;
+    max-width: 33%;
   }
 
   .disabled {
     opacity: 0.3;
   }
 
-  .item .v-list__tile__sub-title {
+  .item .v-list-item__subtitle {
     line-clamp: 3;
     -webkit-line-clamp: 3;
     max-height: 55px;
