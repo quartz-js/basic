@@ -10,6 +10,7 @@ import QuartzCore from '@quartz/core'
 import App from '@/App'
 import Router from 'vue-router'
 import { StyleService } from '@quartz/style/src/app/StyleService'
+const axios = require('axios');
 
 export class VueServiceProvider extends ServiceProvider {
 
@@ -20,6 +21,8 @@ export class VueServiceProvider extends ServiceProvider {
     Vue.use(QuartzCore) 
     Vue.use(VueLocalStorage)
     Vue.use(VueI18n)
+    Vue.use(require('vue-datetime'))
+
     window.bus = new Vue()
 
     this.loadComponents()(Vue);
@@ -29,6 +32,8 @@ export class VueServiceProvider extends ServiceProvider {
       silentTranslationWarn: false,
       messages: container.get('$quartz.lang')
     });
+
+    axios.defaults.headers.common["Accept-Language"] = container.get('settings').get('language', 'en')
 
     Vue.use(Vuetify, {
       directives: {
