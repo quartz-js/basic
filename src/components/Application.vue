@@ -5,7 +5,7 @@
       <v-toolbar-title>{{ $root.config.app.name }}</v-toolbar-title>
       <searcher />
       <div class='fluid-fill'></div>
-      <v-btn icon :to="{'name': 'services'}" class='mx-3' small><v-icon>fas fa-cubes</v-icon></v-btn>
+      <v-btn icon :to="{'name': 'services'}" class='mx-3'><v-icon>fas fa-cubes</v-icon></v-btn>
       <notification-icon :user="user"/>
       <div style='border-left: 2px solid #efefef; height: 36px; margin-right: 10px; margin-left: 10px'></div>
       <avatar :user="user"/>
@@ -114,10 +114,3 @@ export default {
   }
 }
 </script>
-<style scoped>
-
-.theme--light.v-btn.v-btn--icon {
-    color: rgba(0, 0, 0, 0.84);
-}
-
-</style>
