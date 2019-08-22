@@ -1,6 +1,7 @@
 import { ServiceProvider } from '@quartz/core'
 
 import { container } from '@quartz/core'
+import { Ripple } from 'vuetify/lib/directives'
 import VueLocalStorage from 'vue-localstorage'
 import Vue from 'vue'
 import Vuetify from 'vuetify/lib'
@@ -29,7 +30,11 @@ export class VueServiceProvider extends ServiceProvider {
       messages: container.get('$quartz.lang')
     });
 
-    Vue.use(Vuetify)
+    Vue.use(Vuetify, {
+      directives: {
+        Ripple
+      }
+    })
 
     let vuetify = new Vuetify({
       theme: StyleService.getTheme()
