@@ -1,6 +1,6 @@
 <template>
-  <v-app v-if="user" v-bind:style="{ background: $vuetify.theme.themes.light.background }">
-    <v-app-bar app class="toolbar" v-bind:style="{ background: $vuetify.theme.themes.light.header }">
+  <v-app v-if="user">
+    <v-app-bar app class="toolbar">
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" small class='mx-1'></v-app-bar-nav-icon>
       <v-toolbar-title>{{ $root.config.app.name }}</v-toolbar-title>
       <searcher />
@@ -32,7 +32,7 @@
       </v-list>
     </q-sidebar>
     <snackbar />
-    <v-content>
+    <v-content  v-bind:style="{ background: $vuetify.theme.themes.light.background }">
       <v-container style='padding: 0; max-width: 1400px'>
         <router-view :user="user" :key="$route.fullPath"/>
       </v-container>
