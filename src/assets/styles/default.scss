@@ -15,10 +15,6 @@ $head-font-family: 'Montserrat';
 @import '~vuetify/src/styles/components/_index';
 @import '~vuetify/src/styles/utilities/_index';
 
-.theme--light.v-tabs > .v-tabs-bar,.theme--light.v-tabs > .v-tabs-items {
-  background: none
-}
-
 .v-list-item .v-list-item__title, .v-list-item .v-list-item__subtitle {
   line-height: 1.6
 }
