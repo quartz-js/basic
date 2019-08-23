@@ -1,7 +1,7 @@
 <template>
   <v-app v-if="user">
-    <q-app-bar class="toolbar">
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer" small class='mx-1'></v-app-bar-nav-icon>
+    <q-app-bar app class="toolbar" :clipped-left="$container.get('style.q-sidebar.clipped')">
+      <v-app-bar-nav-icon @click.stop="drawer = !drawer" class='mx-1'></v-app-bar-nav-icon>
       <v-toolbar-title>{{ $root.config.app.name }}</v-toolbar-title>
       <searcher />
       <div class='fluid-fill'></div>
@@ -10,9 +10,9 @@
       <div style='border-left: 2px solid #efefef; height: 36px; margin-right: 10px; margin-left: 10px'></div>
       <avatar :user="user"/>
     </q-app-bar>
-    <q-sidebar v-model='drawer' class="navigation">
+    <q-sidebar app v-model='drawer' class="navigation">
       <v-list>
-        <v-list-item to="/dashboard" :color="$container.get('style.sidebar.itemColorActive')">
+        <v-list-item to="/dashboard" :color="$container.get('style.q-sidebar.itemColorActive')">
           <v-list-item-action>
             <v-icon>dashboard</v-icon>
           </v-list-item-action>
@@ -21,10 +21,8 @@
           </v-list-item-content>
         </v-list-item>
       </v-list>
-
-
       <v-list v-if="services">
-        <v-list-item v-for="(service, index) in services" :to="service.config.options.url" :key="index" :color="$container.get('style.sidebar.itemColorActive')">
+        <v-list-item v-for="(service, index) in services" :to="service.config.options.url" :key="index" :color="$container.get('style.q-sidebar.itemColorActive')">
           <v-list-item-content>
             <v-list-item-title>{{ $t("$quartz.data." + service.config.label + ".name") }}</v-list-item-title>
           </v-list-item-content>
@@ -42,7 +40,6 @@
 
 <script>
 require('../assets/styles/default.scss')
-
 
 import { container } from '@quartz/core'
 import NotificationIcon from '@quartz/notification/src/components/notification/notification-icon'
