@@ -22,7 +22,6 @@ export class VueServiceProvider extends ServiceProvider {
     Vue.use(QuartzCore) 
     Vue.use(VueLocalStorage)
     Vue.use(VueI18n)
-    Vue.use(require('vue-datetime'))
 
     Vue.use(VueApexCharts)
     Vue.component('apexchart', VueApexCharts)
