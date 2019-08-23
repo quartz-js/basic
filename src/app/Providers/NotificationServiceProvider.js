@@ -1,13 +1,23 @@
 import { ServiceProvider } from '@quartz/core'
 import Echo from 'laravel-echo'
 import { container } from '@quartz/core'
-import Notifications from 'vue-notification'
-import Vue from 'vue'
+// import Notifications from 'vue-notification'
 
 export class NotificationServiceProvider extends ServiceProvider {
 
   boot() {
-    Vue.use(Notifications)
+
+    window.io = require('socket.io-client')
+
+    if (container.get('config').app.websocket.url) {
+      window.Echo = new Echo({
+        broadcaster: 'socket.io',
+        host: container.get('config').app.websocket.url,
+        auth: { headers: { 'Authorization': 'Bearer ' + container.get('oauth').getToken() } }
+      })
+    }
+
+    // Vue.use(Notifications)
 
     var Notify = {}
 
@@ -43,15 +53,6 @@ export class NotificationServiceProvider extends ServiceProvider {
       Notify.request()
     }
 
-    window.io = require('socket.io-client')
-
-    if (container.get('config').app.websocket.url) {
-      window.Echo = new Echo({
-        broadcaster: 'socket.io',
-        host: container.get('config').app.websocket.url,
-        auth: { headers: { 'Authorization': 'Bearer ' + container.get('oauth').getToken() } }
-      })
-    }
 
   }
 }

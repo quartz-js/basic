@@ -1,11 +1,6 @@
-import Vue from 'vue'
-import { container } from '@quartz/core'
+import { container, ResourceApi } from '@quartz/core'
 
-export class IndexApi {
-  constructor () {
-    this.url = container.get('config').app.api.url;
-    this.access_token = container.get('oauth').getToken()
-  }
+export class IndexApi extends ResourceApi {
 
   /**
    * Index
@@ -15,11 +10,6 @@ export class IndexApi {
    * @return {Promise}
    */
   index (params) {
-    return Vue.http.get(this.url, {
-      params: params,
-      headers: {
-        Authorization: 'Bearer ' + this.access_token
-      }
-    })
+    return this.get('', params)
   }
 }

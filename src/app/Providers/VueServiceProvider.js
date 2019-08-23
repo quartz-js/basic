@@ -11,6 +11,7 @@ import App from '@/App'
 import Router from 'vue-router'
 import { StyleService } from '@quartz/style/src/app/StyleService'
 const axios = require('axios');
+import VueApexCharts from 'vue-apexcharts'
 
 export class VueServiceProvider extends ServiceProvider {
 
@@ -23,7 +24,8 @@ export class VueServiceProvider extends ServiceProvider {
     Vue.use(VueI18n)
     Vue.use(require('vue-datetime'))
 
-    window.bus = new Vue()
+    Vue.use(VueApexCharts)
+    Vue.component('apexchart', VueApexCharts)
 
     this.loadComponents()(Vue);
 
@@ -33,7 +35,7 @@ export class VueServiceProvider extends ServiceProvider {
       messages: container.get('$quartz.lang')
     });
 
-    axios.defaults.headers.common["Accept-Language"] = container.get('settings').get('language', 'en')
+    container.get('axios').defaults.headers.common["Accept-Language"] = container.get('settings').get('language', 'en')
 
     Vue.use(Vuetify, {
       directives: {
@@ -67,7 +69,6 @@ export class VueServiceProvider extends ServiceProvider {
 
     container.set("$vue.router", router)
 
-
     var v = new Vue({
       vuetify,
       i18n: i18n,
@@ -85,6 +86,8 @@ export class VueServiceProvider extends ServiceProvider {
         }
       }
     }).$mount('#app')
+
+    window.bus = v
 
     container.set('translator', v._i18n)
     container.set('$vue.app', v);

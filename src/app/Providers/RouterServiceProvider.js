@@ -1,7 +1,4 @@
-import { ServiceProvider } from '@quartz/core'
-
-import { container } from '@quartz/core'
-import Vue from 'vue'
+import { ServiceProvider, container } from '@quartz/core'
 
 export class RouterServiceProvider extends ServiceProvider {
 
