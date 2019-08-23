@@ -1,6 +1,6 @@
 <template>
   <v-app v-if="user">
-    <v-app-bar app class="toolbar">
+    <q-app-bar class="toolbar">
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" small class='mx-1'></v-app-bar-nav-icon>
       <v-toolbar-title>{{ $root.config.app.name }}</v-toolbar-title>
       <searcher />
@@ -9,8 +9,8 @@
       <notification-icon :user="user"/>
       <div style='border-left: 2px solid #efefef; height: 36px; margin-right: 10px; margin-left: 10px'></div>
       <avatar :user="user"/>
-    </v-app-bar>
-    <q-sidebar v-model='drawer' app class="navigation">
+    </q-app-bar>
+    <q-sidebar v-model='drawer' class="navigation">
       <v-list>
         <v-list-item to="/dashboard" :color="$container.get('style.sidebar.itemColorActive')">
           <v-list-item-action>
