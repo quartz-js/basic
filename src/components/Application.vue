@@ -12,7 +12,7 @@
     </q-app-bar>
     <q-sidebar app v-model='drawer' class="navigation">
       <v-list>
-        <v-list-item to="/dashboard" :color="$container.get('style.q-sidebar.itemColorActive')">
+        <v-list-item to="/dashboard">
           <v-list-item-action>
             <v-icon>dashboard</v-icon>
           </v-list-item-action>
@@ -22,7 +22,7 @@
         </v-list-item>
       </v-list>
       <v-list v-if="services">
-        <v-list-item v-for="(service, index) in services" :to="service.config.options.url" :key="index" :color="$container.get('style.q-sidebar.itemColorActive')">
+        <v-list-item v-for="(service, index) in services" :to="service.config.options.url" :key="index">
           <v-list-item-content>
             <v-list-item-title>{{ $t("$quartz.data." + service.config.label + ".name") }}</v-list-item-title>
           </v-list-item-content>
