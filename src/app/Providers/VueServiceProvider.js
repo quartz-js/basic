@@ -68,6 +68,8 @@ export class VueServiceProvider extends ServiceProvider {
 
     container.set("$vue.router", router)
 
+    container.set('yaml', require('js-yaml'))
+    
     var v = new Vue({
       vuetify,
       i18n: i18n,
