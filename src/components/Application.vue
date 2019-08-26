@@ -1,6 +1,6 @@
 <template>
   <v-app v-if="user">
-    <q-app-bar app class="toolbar" :clipped-left="$container.get('style.q-sidebar.clipped')">
+    <q-app-bar app class="toolbar">
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" class='mx-1'></v-app-bar-nav-icon>
       <v-toolbar-title>{{ $root.config.app.name }}</v-toolbar-title>
       <searcher />
