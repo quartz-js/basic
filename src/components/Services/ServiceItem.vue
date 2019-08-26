@@ -16,7 +16,7 @@
             <v-menu offset-y>
               <template v-slot:activator="{ on }">
                 <v-btn v-on="on" icon small text class="ma-0" height='24' width='24'>
-                  <v-icon accent>more_horiz</v-icon>
+                  <q-icon accent>more_horiz</q-icon>
                 </v-btn>
               </template>
               <v-list>

@@ -44,7 +44,7 @@
             small
             @click="item.fav = !item.fav"
           >
-            <v-icon>fas fa-cubes</v-icon>
+            <q-icon>fas fa-cubes</q-icon>
           </v-btn>
         </v-list-item-action>
       </v-list-item>

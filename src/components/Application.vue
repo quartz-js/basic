@@ -5,7 +5,7 @@
       <v-toolbar-title>{{ $root.config.app.name }}</v-toolbar-title>
       <searcher />
       <div class='fluid-fill'></div>
-      <v-btn icon :to="{'name': 'services'}" class='mx-3'><v-icon>fas fa-cubes</v-icon></v-btn>
+      <v-btn icon :to="{'name': 'services'}" class='mx-3'><q-icon>fas fa-cubes</q-icon></v-btn>
       <notification-icon :user="user"/>
       <div style='border-left: 2px solid #efefef; height: 36px; margin-right: 10px; margin-left: 10px'></div>
       <avatar :user="user"/>
@@ -14,7 +14,7 @@
       <v-list>
         <v-list-item to="/dashboard">
           <v-list-item-action>
-            <v-icon>dashboard</v-icon>
+            <q-icon>dashboard</q-icon>
           </v-list-item-action>
           <v-list-item-content>
             <v-list-item-title>Dashboard</v-list-item-title>
