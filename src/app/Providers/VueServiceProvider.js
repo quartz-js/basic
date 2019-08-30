@@ -61,9 +61,7 @@ export class VueServiceProvider extends ServiceProvider {
         return { x: 0, y: 0 }
       },
       routes: routes,
-      hashbang: false,
       history: true,
-      mode: 'history'
     })
 
     container.set("$vue.router", router)
