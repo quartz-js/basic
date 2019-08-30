@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class='mt-3'>
-      <v-layout row wrap class="" style='margin: 0 -15px'>
+      <v-layout row wrap>
         <v-flex xs4>
           <q-card class="pa-3 ma-3 ">
             <apexchart :options="chartOptions1" :series="series1" height='150'></apexchart>
@@ -34,7 +34,7 @@
     </div>
 
     <div>
-      <q-card flat class="my-3">
+      <q-card class="my-3">
         <v-subheader class="title">{{ $t('$quartz.basic.services') }}</v-subheader>
         <v-divider></v-divider>
         <service-item  :services="retrieveServices()"></service-item>
