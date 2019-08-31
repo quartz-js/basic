@@ -1,7 +1,6 @@
 import { ServiceProvider } from '@quartz/core'
 import Echo from 'laravel-echo'
 import { container } from '@quartz/core'
-// import Notifications from 'vue-notification'
 
 export class NotificationServiceProvider extends ServiceProvider {
 
@@ -16,8 +15,6 @@ export class NotificationServiceProvider extends ServiceProvider {
         auth: { headers: { 'Authorization': 'Bearer ' + container.get('oauth').getToken() } }
       })
     }
-
-    // Vue.use(Notifications)
 
     var Notify = {}
 
