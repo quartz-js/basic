@@ -15,6 +15,14 @@ import VueApexCharts from 'vue-apexcharts'
 
 export class VueServiceProvider extends ServiceProvider {
 
+  register() {
+    container.get('$quartz.settings').addItem({
+      name: 'sidebar',
+      header: () => import('../../components/SettingsSidebarHeader'),
+      content: () => import('../../components/SettingsSidebarContent')
+    })
+  }
+
   boot() {
 
     Vue.config.productionTip = false

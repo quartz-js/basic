@@ -20,9 +20,6 @@
                 </v-btn>
               </template>
               <v-list>
-                <v-list-item @click="toggleMenu(service)">
-                  <v-list-item-title>{{ hasMenu(service) ? $t("$quartz.basic.nav-remove") : $t("$quartz.basic.nav-add") }}</v-list-item-title>
-                </v-list-item>
                 <v-list-item @click="toggleShow(service)">
                   <v-list-item-title>{{ canShow(service) ? $t("$quartz.basic.remove") : $t("$quartz.basic.add")  }}</v-list-item-title>
                 </v-list-item>
@@ -51,11 +48,6 @@ export default {
     showSection() {
       return true;
     },
-    toggleMenu (service) {
-      container.get('settings').toggle('app.services.menu.' + service.name, 0)
-      this.$forceUpdate()
-      window.bus.$emit('component.update');
-    },
     toggleShow (service) {
       container.get('settings').toggle('app.services.show.' + service.name, 0);
       this.$forceUpdate()
@@ -63,9 +55,6 @@ export default {
     canShow (service) {
       return parseInt(container.get('settings').get('app.services.show.' + service.name, 0))
     },
-    hasMenu (service) {
-      return parseInt(container.get('settings').get('app.services.menu.' + service.name, 0))
-    }
   }
 }
 </script>

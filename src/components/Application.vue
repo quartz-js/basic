@@ -11,23 +11,7 @@
       <avatar :user="user"/>
     </q-app-bar>
     <q-sidebar app v-model='drawer' class="navigation">
-      <v-list>
-        <v-list-item to="/dashboard">
-          <v-list-item-action>
-            <q-icon>dashboard</q-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title>Dashboard</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-      </v-list>
-      <v-list v-if="services">
-        <v-list-item v-for="(service, index) in services" :to="service.config.options.url" :key="index">
-          <v-list-item-content>
-            <v-list-item-title>{{ $t("$quartz.data." + service.config.label + ".name") }}</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-      </v-list>
+        <sidebar-item v-for="item in sidebar" :value="item" />
     </q-sidebar>
     <snackbar />
     <v-content  v-bind:style="{ background: $vuetify.theme.themes.light.background }">
@@ -49,7 +33,7 @@ import Snackbar from './Snackbar'
 import _ from 'lodash'
 import Searcher from './Searcher'
 import Avatar from './Avatar'
-
+import SidebarItem from './SidebarItem'
 
 export default {
   props: ['user'],
@@ -63,6 +47,7 @@ export default {
     },
   },
   components: {
+    SidebarItem,
     Snackbar,
     NotificationIcon,
     Searcher,
@@ -78,17 +63,12 @@ export default {
   },
   data () {
     return {
+      sidebar: [],
       isDark: false,
       drawer: null,
-      services: []
     }
   },
   methods: {
-    load() {
-      this.services = _.filter(container.get('$quartz.view.services'), (module) => {
-        return module.config.options.url && parseInt(container.get('settings').get('app.services.menu.' + module.name))
-      })
-    },
     getDrawerSettingValue()
     {
       let val = container.get('settings').get('app.sidebar', 0);
@@ -96,6 +76,13 @@ export default {
     }
   },
   mounted () {
+    this.sidebar = this.$container.get('settings').get('sidebar', [
+      {
+        url: '/dashboard',
+        label: 'Dashboard',
+        icon: 'dashboard'
+      }
+    ])
   },
   created() {
 
