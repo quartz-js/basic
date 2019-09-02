@@ -1,36 +1,36 @@
 <template>
   <div>
     <div class='mt-3'>
-      <v-layout row wrap>
-        <v-flex xs4>
+      <v-row wrap>
+        <v-col rows="12" md="4" sm="12">
           <q-card class="pa-3 ma-3 ">
             <apexchart :options="chartOptions1" :series="series1" height='150'></apexchart>
           </q-card>
-        </v-flex>
+        </v-col>
 
-        <v-flex xs4>
+        <v-col rows="12" md="4" sm="12">
           <q-card class="pa-3 ma-3 ">
             <apexchart :options="chartOptions1" :series="series1" height='150'></apexchart>
           </q-card>
-        </v-flex>
+        </v-col>
 
-        <v-flex xs4>
+        <v-col rows="12" md="4" sm="12">
           <q-card class="pa-3 ma-3 ">
             <apexchart :options="chartOptions1" :series="series1" height='150'></apexchart>
           </q-card>
-        </v-flex>
+        </v-col>
 
-        <v-flex xs6>
+        <v-col rows="12" md="6" sm="12" >
           <q-card class="pa-3 ma-3 ">
-            <apexchart type="bar" height='400' :options="chartOptions" :series="series"></apexchart>
+            <apexchart type="bar" :options="chartOptions" :series="series"></apexchart>
           </q-card>
-        </v-flex>
-        <v-flex xs6>
+        </v-col>
+        <v-col rows="12" md="6" sm="12">
           <q-card class="pa-3 ma-3 ">
-            <apexchart type="donut" height='400' :options="pie.options" :series="pie.series"></apexchart>
+            <apexchart type="donut" :options="pie.options" :series="pie.series"></apexchart>
           </q-card>
-        </v-flex>
-      </v-layout>
+        </v-col>
+      </v-row>
     </div>
 
     <div>
