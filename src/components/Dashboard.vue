@@ -32,17 +32,6 @@
         </v-col>
       </v-row>
     </div>
-
-    <div>
-      <q-card class="my-3">
-        <v-subheader class="title">{{ $t('$quartz.basic.services') }}</v-subheader>
-        <v-divider></v-divider>
-        <service-item  :services="retrieveServices()"></service-item>
-        <div class='text-right pa-3'>
-          <router-link :to="{name: 'services' }">{{ $t('$quartz.basic.show-all') }}</router-link>
-        </div>
-      </q-card>
-    </div>
   </div>
 </template>
 <script>

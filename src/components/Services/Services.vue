@@ -1,12 +1,8 @@
 <template>
-  <div>
-    <q-card class="my-5 pa-5">
-      <v-subheader class="title">{{ $t('$quartz.basic.services') }}</v-subheader>
-      <v-divider></v-divider>
-      <div v-for="(tag, index) in tags" :key="index">
-        <service-item :tag="tag" :services="retrieveServices(tag)" :show-hidden="showHidden"></service-item>
-      </div>
-    </q-card>
+  <div class="mt-3">
+    <div v-for="(tag, index) in tags" :key="index">
+      <service-item :tag="tag" :services="retrieveServices(tag)" :show-hidden="showHidden"></service-item>
+    </div>
   </div>
 </template>
 
