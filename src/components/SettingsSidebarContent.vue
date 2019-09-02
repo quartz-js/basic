@@ -13,7 +13,7 @@
             </v-col>
             
             <v-col cols="12" md="4">
-              <q-text-field label="Icon" v-model="item.icon" :append-icon="item.icon" />
+              <q-text-field label="Icon" v-model="item.icon" :persistent-hint="true" :append-icon="item.icon" hint="<a href='https://material.io/resources/icons/?style=baseline' target='_blank'>Icons</a>" />
             </v-col>
           </v-row>
 
