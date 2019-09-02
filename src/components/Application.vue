@@ -89,7 +89,6 @@ export default {
     this.drawer = this.getDrawerSettingValue();
 
     window.bus.$on('component.update', () => {
-      this.load();
       this.drawer = true;
       this.$forceUpdate();
     });
