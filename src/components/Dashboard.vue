@@ -2,32 +2,32 @@
   <div>
     <div class='mt-3'>
       <v-row wrap>
-        <v-col rows="12" md="4" sm="12">
-          <q-card class="pa-3 ma-3 ">
+        <v-col cols="12" xs="12" md="4">
+          <q-card class="pa-3">
             <apexchart :options="chartOptions1" :series="series1"></apexchart>
           </q-card>
         </v-col>
 
-        <v-col rows="12" md="4" sm="12">
-          <q-card class="pa-3 ma-3 ">
+        <v-col cols="12" xs="12" md="4">
+          <q-card class="pa-3">
             <apexchart :options="chartOptions1" :series="series1" ></apexchart>
           </q-card>
         </v-col>
 
-        <v-col rows="12" md="4" sm="12">
-          <q-card class="pa-3 ma-3 ">
+        <v-col cols="12" xs="12" md="4">
+          <q-card class="pa-3">
             <apexchart :options="chartOptions1" :series="series1"></apexchart>
           </q-card>
         </v-col>
 
-        <v-col rows="12" md="6" sm="12" >
-          <q-card class="pa-3 ma-3">
+        <v-col cols="12" md="6" sm="12" >
+          <q-card class="pa-3">
             <apexchart type="bar" :options="chartOptions" :series="series"></apexchart>
           </q-card>
         </v-col>
-        <v-col rows="12" md="6" sm="12">
-          <q-card class="pa-3 ma-3 ">
-            <apexchart type="donut" :options="pie.options" :series="pie.series"></apexchart>
+        <v-col cols="12" md="6" sm="12">
+          <q-card class="pa-3">
+            <apexchart type="bar" :options="chartOptions" :series="series"></apexchart>
           </q-card>
         </v-col>
       </v-row>
