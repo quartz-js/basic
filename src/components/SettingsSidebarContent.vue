@@ -52,14 +52,7 @@ export default {
           url: '/dashboard',
           label: 'Dashboard',
           icon: 'dashboard',
-          key: 'dashboard',
           children: [
-            {
-              key: 'dashboard.dashboard',
-              url: '/dashboard',
-              label: 'Dashboard',
-              icon: 'dashboard',
-            }
           ]
         }
       ])
