@@ -11,7 +11,11 @@
       <avatar :user="user"/>
     </q-app-bar>
     <q-sidebar app v-model='drawer' class="navigation">
-        <sidebar-item v-for="item in sidebar" :value="item" />
+      <div v-if="$container.get('api.config.logo')" class="pa-3">
+
+        <img :src="$container.get('api.config.logo')" style='max-width: 100%; max-height: 80px'>
+      </div>
+      <sidebar-item v-for="item in sidebar" :value="item" />
     </q-sidebar>
     <snackbar />
     <v-content  v-bind:style="{ background: $vuetify.theme.themes.light.background }">

@@ -65,3 +65,7 @@ th {
 .v-navigation-drawer {
   overflow: initial !important 
 }
+
+.v-data-table th {
+    white-space: nowrap;
+}

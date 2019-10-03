@@ -12,6 +12,8 @@ import Router from 'vue-router'
 import { StyleService } from '@quartz/style/src/app/StyleService'
 const axios = require('axios');
 import VueApexCharts from 'vue-apexcharts'
+import { Dictionary } from '@quartz/data-view/src/app/Services/Dictionary'
+import _ from 'lodash'
 
 export class VueServiceProvider extends ServiceProvider {
 
@@ -98,5 +100,17 @@ export class VueServiceProvider extends ServiceProvider {
 
     container.set('translator', v._i18n)
     container.set('$vue.app', v);
+
+
+
+    let config = (new Dictionary()).newApiByName('config')
+
+    return config.index({}).then(response => {
+      container.set('api.config', _.transform(response.body.data, (r, v, k) => {
+        return r[v.key] = v.value;
+      }))
+
+      console.log(container.get('api.config'));
+    })
   }
 }
