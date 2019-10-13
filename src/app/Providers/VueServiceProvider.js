@@ -101,7 +101,28 @@ export class VueServiceProvider extends ServiceProvider {
     container.set('translator', v._i18n)
     container.set('$vue.app', v);
 
-
+    container.get('settings').setDefault('template', {
+      'title': true,
+      'search': true,
+      'notification': true,
+      'services': true,
+      'leftNavEnabled': true,
+      'leftNavItems': [
+        {
+          url: '/dashboard',
+          label: 'Dashboard',
+          icon: 'dashboard'
+        }
+      ],
+      'topNavEnabled': true,
+      'topNavItems': [
+        {
+          url: '/dashboard',
+          label: 'Dashboard',
+          icon: 'dashboard'
+        }
+      ]
+    })
 
     let config = (new Dictionary()).newApiByName('config')
 

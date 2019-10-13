@@ -1,6 +1,6 @@
 <template>
   <div>
     <q-icon left>vertical_split</q-icon>
-    Sidebar
+    Customization
   </div>
 </template>

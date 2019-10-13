@@ -1,28 +1,31 @@
 <template>
-  <v-app v-if="user">
+  <v-app v-if="user" v-bind:style="{ background: $vuetify.theme.themes.light.background }">
     <q-app-bar app class="toolbar">
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer" class='mx-1'></v-app-bar-nav-icon>
-      <v-toolbar-title>{{ $root.config.app.name }}</v-toolbar-title>
-      <searcher />
+      <v-app-bar-nav-icon @click.stop="drawer = !drawer" class='mx-1' v-if="$container.get('settings').get('template.leftNavEnabled')"></v-app-bar-nav-icon>
+      <v-toolbar-title v-if="$container.get('settings').get('template.title')">{{ $root.config.app.name }}</v-toolbar-title>
+      <searcher  v-if="$container.get('settings').get('template.search')"/>
+
+      <sidebar-item v-for="item in $container.get('settings').get('template.topNavItems')" :value="item" />
+
       <div class='fluid-fill'></div>
-      <v-btn icon :to="{'name': 'services'}" class='mx-3'><q-icon>fas fa-cubes</q-icon></v-btn>
-      <notification-icon :user="user"/>
+      <v-btn icon :to="{'name': 'services'}" class='mx-3'  v-if="$container.get('settings').get('template.services')"><q-icon>fas fa-cubes</q-icon></v-btn>
+      <notification-icon :user="user"  v-if="$container.get('settings').get('template.notification')"/>
       <div style='border-left: 2px solid #efefef; height: 36px; margin-right: 10px; margin-left: 10px'></div>
       <avatar :user="user"/>
     </q-app-bar>
-    <q-sidebar app v-model='drawer' class="navigation">
+    <q-sidebar app v-model='drawer' class="navigation" v-if="$container.get('settings').get('template.leftNavEnabled')">
       <div v-if="$container.get('api.config.logo')" class="pa-3">
 
         <img :src="$container.get('api.config.logo')" style='max-width: 100%; max-height: 80px'>
       </div>
-      <sidebar-item v-for="item in sidebar" :value="item" />
+      <sidebar-item v-for="item in $container.get('settings').get('template.leftNavItems')" :value="item" />
     </q-sidebar>
     <snackbar />
-    <v-content  v-bind:style="{ background: $vuetify.theme.themes.light.background }">
-      <v-container style='padding: 0; max-width: 1400px'>
+    <q-content>
+      <q-container>
         <router-view :user="user" :key="$route.fullPath"/>
-      </v-container>
-    </v-content>
+      </q-container>
+    </q-content>
   </v-app>
 </template>
 
@@ -80,13 +83,7 @@ export default {
     }
   },
   mounted () {
-    this.sidebar = this.$container.get('settings').get('sidebar', [
-      {
-        url: '/dashboard',
-        label: 'Dashboard',
-        icon: 'dashboard'
-      }
-    ])
+    this.sidebar = this.$container.get('settings').get('template.leftNavItems')
   },
   created() {
 
