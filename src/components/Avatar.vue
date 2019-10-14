@@ -1,5 +1,5 @@
 <template>
-  <v-menu class="ml-2" nudge-top="-51" nudge-left='-100' v-if="user">
+  <v-menu class="ml-2" nudge-top="-51" left v-if="user">
     <template v-slot:activator="{ on }">
       <v-avatar icon v-on="on" :size='36' style='cursor:pointer' >
         <img :src="avatar">
