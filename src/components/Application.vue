@@ -8,7 +8,7 @@
         <v-toolbar-title v-if="$container.get('settings').get('template.title')">{{ $root.config.app.name }}</v-toolbar-title>
         <searcher  v-if="$container.get('settings').get('template.search')"/>
 
-        <sidebar-item v-for="item in $container.get('settings').get('template.topNavItems')" :value="item" />
+        <sidebar-item v-for="item in $container.get('settings').get('template.topNavItems')" :value="item" v-if="$container.get('settings').get('template.topNavEnabled')"/>
 
         <div class='fluid-fill'></div>
         <v-btn icon :to="{'name': 'services'}" class='mx-3'  v-if="$container.get('settings').get('template.services')"><q-icon>fas fa-cubes</q-icon></v-btn>
@@ -71,7 +71,6 @@ export default {
   },
   data () {
     return {
-      sidebar: [],
       isDark: false,
       drawer: null,
     }
@@ -82,9 +81,6 @@ export default {
       let val = container.get('settings').get('app.sidebar', 0);
       return val === true || parseInt(val) === 1 ? true : false;
     }
-  },
-  mounted () {
-    this.sidebar = this.$container.get('settings').get('template.leftNavItems')
   },
   created() {
 

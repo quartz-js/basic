@@ -59,13 +59,13 @@
         </template>
 
         <template slot="append" slot-scope="{ item }">
-          <q-btn color="error" content-icon="remove" content-text="Remove" @click="removeChild(item)"/>
-          <q-btn color="primary" content-icon="add" content-text="Create Item" @click="addChild(item);" />
+          <q-btn-table color="error" content-icon="remove" content-text="Remove" @click="removeChild(settings.leftNavItems, item)"/>
+          <q-btn-table color="primary" content-icon="add" content-text="Create Child" @click="addChild(settings.leftNavItems, item);" />
         </template>
       </v-treeview>
 
       <div class="text-right">
-        <q-btn color="primary" content-text="Add Item" @click="add(settings.leftNavItems)"/>
+        <q-btn color="primary" content-text="Create" @click="add(settings.leftNavItems)"/>
       </div>
       <v-divider class="mb-5" />
 
@@ -95,13 +95,13 @@
         </template>
 
         <template slot="append" slot-scope="{ item }">
-          <q-btn color="error" content-icon="remove" content-text="Remove" @click="removeChild(item)"/>
-          <q-btn color="primary" content-icon="add" content-text="Create Item" @click="addChild(item);" />
+          <q-btn-table color="error" content-icon="remove" content-text="Remove" @click="removeChild(settings.topNavItems, item)"/>
+          <q-btn-table color="primary" content-icon="add" content-text="Create Child" @click="addChild(settings.topNavItems, item);" />
         </template>
       </v-treeview>
 
       <div class="text-right">
-        <q-btn color="primary" content-text="Add Item" @click="add(settings.topNavItems)"/>
+        <q-btn color="primary" content-text="Create" @click="add(settings.topNavItems)"/>
       </div>
 
     <v-divider class="mb-5" />
@@ -147,36 +147,35 @@ export default {
         this.removeParent(i.children || [])
       })
     },
-    getDefaultNode() {
+    getDefaultNode(parent) {
       return {
         url: '',
         label: '',
         icon: '',
-        children: []
+        children: [],
+        parent: parent
       }
     },
     add(items) {
       items.push(this.getDefaultNode());
     },
-    addChild(item) {
+    addChild(nodes, item) {
       if (!item.children) {
         this.$set(item, "children", []);
       }
-      item.children.push(this.getDefaultNode());
+      item.children.push(this.getDefaultNode(item));
     },
-    removeChild(item) {
+    removeChild(nodes, item) {
 
-      let list = item.parent ? item.parent.children : this.settings.leftNavItems
+      let list = item.parent ? item.parent.children : nodes
 
-      console.log(item)
 
       let index = list.findIndex(i => {
         return i.name === item.name
       })
 
-      list.splice(index, 1)
 
-      console.log(list)
+      list.splice(index, 1)
     },
     save() {
       let settings = _.clone(this.settings)
@@ -186,6 +185,7 @@ export default {
       this.loading = true
       this.$container.get('settings').store('template', settings).then(i => {
         this.loading = false
+        window.bus.$emit('component.update');
       });
     },
     change($event) {

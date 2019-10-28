@@ -10,7 +10,7 @@
           <v-list-item-title>{{ value.label }}</v-list-item-title>
         </v-list-item-content>
       </template>
-      <sidebar-item v-for="item in value.children" :value="item" />
+      <sidebar-item v-for="item in value.children" :value="item" class="ml-3" />
     </v-list-group>
     <v-list-item v-else :to="value.url">
       <v-list-item-action v-if="value.icon">
