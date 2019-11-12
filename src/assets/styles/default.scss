@@ -69,3 +69,19 @@ th {
 .v-data-table th {
     white-space: nowrap;
 }
+
+.vue-grid-placeholder {
+  background: #e1e1e1 !important;
+  opacity: 1 !important;
+}
+
+.vue-grid-item {
+  border: 2px dashed transparent ;
+}
+
+.vue-grid-item.active {
+  border: 2px dashed #ccc ;
+}
+.vue-grid-item.active *:not(.vue-resizable-handle) {
+  cursor: move
+}

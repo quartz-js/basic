@@ -11,7 +11,7 @@
         <sidebar-item v-for="item in $container.get('settings').get('template.topNavItems')" :value="item" v-if="$container.get('settings').get('template.topNavEnabled')"/>
 
         <div class='fluid-fill'></div>
-        <v-btn icon :to="{'name': 'services'}" class='mx-3'  v-if="$container.get('settings').get('template.services')"><q-icon>fas fa-cubes</q-icon></v-btn>
+        <v-btn icon :to="{'name': 'services'}" class='mx-3' v-if="$container.get('settings').get('template.services')"><q-icon>fas fa-cubes</q-icon></v-btn>
         <notification-icon :user="user"  v-if="$container.get('settings').get('template.notification')"/>
         <div style='border-left: 2px solid #efefef; height: 36px; margin-right: 10px; margin-left: 10px'></div>
         <avatar :user="user"/>
@@ -76,6 +76,11 @@ export default {
     }
   },
   methods: {
+    changeEdit()
+    {
+      this.$container.get('settings').set('dw-edit', !this.$container.get('settings').get('dw-edit', 0));
+      window.bus.$emit('component.update')
+    },
     getDrawerSettingValue()
     {
       let val = container.get('settings').get('app.sidebar', 0);
