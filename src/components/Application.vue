@@ -2,7 +2,6 @@
   <v-app v-if="user" v-bind:style="{ background: $vuetify.theme.themes.light.background }">
     <q-app>
       <q-logo :src="$container.get('api.config.logo')" />
-
       <q-app-bar app class="toolbar">
         <v-app-bar-nav-icon @click.stop="drawer = !drawer" class='mx-1' v-if="$container.get('settings').get('template.leftNavEnabled')"></v-app-bar-nav-icon>
         <v-toolbar-title v-if="$container.get('settings').get('template.title')">{{ $root.config.app.name }}</v-toolbar-title>
@@ -14,6 +13,7 @@
         <v-btn icon :to="{'name': 'services'}" class='mx-3' v-if="$container.get('settings').get('template.services')"><q-icon>fas fa-cubes</q-icon></v-btn>
         <notification-icon :user="user"  v-if="$container.get('settings').get('template.notification')"/>
         <div style='border-left: 2px solid #efefef; height: 36px; margin-right: 10px; margin-left: 10px'></div>
+        <div class="pa-3">{{ user.name }}</div>
         <avatar :user="user"/>
       </q-app-bar>
       <q-sidebar app v-model='drawer' class="navigation" v-if="$container.get('settings').get('template.leftNavEnabled')">
