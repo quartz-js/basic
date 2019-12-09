@@ -12,7 +12,7 @@
       </template>
       <sidebar-item v-for="item in value.children" :value="item" class="ml-3" />
     </v-list-group>
-    <v-list-item v-else :to="value.url">
+    <v-list-item v-else v-bind="getBindUrl(value)">
       <v-list-item-action v-if="value.icon">
         <v-icon>{{ value.icon }}</v-icon>
       </v-list-item-action>
@@ -31,7 +31,16 @@ export default {
     return {
       open: false
     }
+  },
+  methods: {
+    getBindUrl(item) {
+
+      if (item.url.includes("http")) {
+        return {href: item.url}
+      }
+
+      return {to: item.url}
+    }
   }
-  
 }
 </script>
