@@ -82,6 +82,16 @@ th {
 .vue-grid-item.active {
   border: 2px dashed #ccc ;
 }
+
 .vue-grid-item.active *:not(.vue-resizable-handle) {
   cursor: move
+}
+
+.CodeMirror {
+  height: 100% !important;
+}
+
+.label-form {
+  color: rgba(0, 0, 0, 0.54);
+  font-size: 12px
 }
