@@ -22,9 +22,9 @@
       </q-sidebar>
       <snackbar />
       <q-content>
-        <v-container style='padding: 0'>
+        <q-container>
           <router-view :user="user" :key="$route.fullPath"/>
-        </v-container>
+        </q-container>
       </q-content>
     </q-app>
   </v-app>
