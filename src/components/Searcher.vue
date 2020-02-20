@@ -55,6 +55,7 @@
 <script>
 
 import { container } from '@quartz/core'
+const s = require("underscore.string");
 
 export default {
   data () {
@@ -87,7 +88,7 @@ export default {
 
       this.search.items = container.get('$quartz.view.services').map(service => {
         return {
-          title: this.$t("$quartz.data." + service.config.label + ".name"),
+          title: s.umanize(service.config.label),
           icon: service.config.icon,
           url: service.config.options.url,
           fav: true
