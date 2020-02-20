@@ -8,7 +8,7 @@
           <v-row class="text-xs-center text-md-left">
             <v-col class="pa-7" style='max-width: 120px'>
               <router-link :to="service.config.options.url">
-                <q-view-icon :src="service.config.icon" width='80' />
+                  <img :src="service.config.icon" width='80'>
               </router-link>
             </v-col>
 
@@ -16,7 +16,7 @@
               <div class="align-center justify-center pa-3">
                 <p class="title ma-0 pa-1 " style='display: flex'>
                   <router-link :to="service.config.options.url" style='flex-grow: 1'>
-                    {{ humanize(service.config.label) }}
+                    {{ $t("$quartz.data." + service.config.label + ".name") }}
                   </router-link>
                 </p>
                 <p style='font-size:12px' class="pa-1 ma-0">
@@ -35,16 +35,12 @@
 
 import store from 'store2'
 import { container } from '@quartz/core'
-const s = require("underscore.string");
 
 export default {
   props: ['services', 'showHidden', 'tag'],
   methods: {
     showSection() {
       return true;
-    },
-    humanize(str) {
-      return s.humanize(str)
     },
     toggleShow (service) {
       container.get('settings').toggle('app.services.show.' + service.name, 0);
