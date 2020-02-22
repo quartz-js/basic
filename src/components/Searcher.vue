@@ -29,7 +29,7 @@
 
       <v-list-item  :to="item.url" >
         <v-list-item-avatar>
-            <img :src="item.icon" alt="icon">
+            <q-view-icon :src="item.icon" alt="icon" />
         </v-list-item-avatar>
 
         <v-list-item-content >
@@ -88,7 +88,7 @@ export default {
 
       this.search.items = container.get('$quartz.view.services').map(service => {
         return {
-          title: s.umanize(service.config.label),
+          title: s.humanize(service.config.label),
           icon: service.config.icon,
           url: service.config.options.url,
           fav: true
