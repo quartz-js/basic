@@ -1,6 +1,15 @@
 <template>
   <div>
     <div class='mt-3'>
+      <v-row wrap>
+        <v-col cols="12" xs="12" md="12">
+          <q-card class="pa-5">
+            <h2 class="title">Welcome</h2>
+            <v-divider class="my-5"/>
+            <p>This is a dummy dashboard. Please check the list of services <router-link to="/services">here</router-link></p>
+          </q-card>
+        </v-col>
+      </v-row>
       <!--<v-row wrap>
         <v-col cols="12" xs="12" md="4">
           <q-card class="pa-3">
