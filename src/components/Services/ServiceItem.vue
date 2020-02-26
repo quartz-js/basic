@@ -8,19 +8,27 @@
           <v-row class="text-xs-center text-md-left align-center">
             <v-col  style='max-width: 160px; '>
               <router-link :to="service.config.options.url" >
-                <q-view-icon :src="service.config.icon" width='90' style='display: block; margin: 0 auto' />
+                <q-view-icon :src="service.config.icon" width='100' style='display: block; margin: 0 auto' />
               </router-link>
             </v-col>
 
-            <v-col class="py-0" >
-              <div class="align-center justify-center" style='margin-left: -30px' >
-                <p class="title ma-0 " style='display: flex'>
+            <v-col class="py-0 pr-5" >
+              <div class="align-center justify-center" style='margin-left: -20px' >
+                <p class="title ma-0 mt-3 " style='display: flex'>
                   <router-link :to="service.config.options.url" style='flex-grow: 1'>
                     {{ humanize(service.config.label) }}
+
                   </router-link>
                 </p>
                 <p style='font-size:12px' class="ma-0">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer lobortis in arcu at pellentesque. Integer lobortis in arcu at pellentesque. 
+
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer lobortis in arcu at pellentesque. Integer lobortis in. 
+                </p>
+                <p class="text-right mt-4 pr-2">
+
+                    <v-chip color="pink" label small text-color="white" style='margin-top:-4px' class='mx-2'>System</v-chip>
+                    <v-chip color="purple" label small text-color="white" style='margin-top:-4px' class='mx-2'>Schema</v-chip>
+                    <v-chip color="blue" label small text-color="white" style='margin-top:-4px' class='mx-2'>Data</v-chip>
                 </p>
               </div>
             </v-col>
