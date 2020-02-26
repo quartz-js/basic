@@ -5,21 +5,21 @@
     <v-row>
       <v-col cols="12" md="6" lg="4" v-for="(service, index) in services" :key="index">
         <q-card>
-          <v-row class="text-xs-center text-md-left">
-            <v-col class="pa-7" style='max-width: 120px'>
-              <router-link :to="service.config.options.url">
-                <q-view-icon :src="service.config.icon" width='80' />
+          <v-row class="text-xs-center text-md-left align-center">
+            <v-col  style='max-width: 160px; '>
+              <router-link :to="service.config.options.url" >
+                <q-view-icon :src="service.config.icon" width='90' style='display: block; margin: 0 auto' />
               </router-link>
             </v-col>
 
-            <v-col class="pa-0">
-              <div class="align-center justify-center pa-3">
-                <p class="title ma-0 pa-1 " style='display: flex'>
+            <v-col class="py-0" >
+              <div class="align-center justify-center" style='margin-left: -30px' >
+                <p class="title ma-0 " style='display: flex'>
                   <router-link :to="service.config.options.url" style='flex-grow: 1'>
                     {{ humanize(service.config.label) }}
                   </router-link>
                 </p>
-                <p style='font-size:12px' class="pa-1 ma-0">
+                <p style='font-size:12px' class="ma-0">
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer lobortis in arcu at pellentesque. Integer lobortis in arcu at pellentesque. 
                 </p>
               </div>
