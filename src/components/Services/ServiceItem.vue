@@ -25,10 +25,9 @@
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer lobortis in arcu at pellentesque. Integer lobortis in. 
                 </p>
                 <p class="text-right mt-4 pr-2">
-
-                    <v-chip color="pink" label small text-color="white" style='margin-top:-4px' class='mx-2'>System</v-chip>
-                    <v-chip color="purple" label small text-color="white" style='margin-top:-4px' class='mx-2'>Schema</v-chip>
-                    <v-chip color="blue" label small text-color="white" style='margin-top:-4px' class='mx-2'>Data</v-chip>
+                  <v-chip color="pink" label small text-color="white" class='mx-2'>System</v-chip>
+                  <v-chip color="purple" label small text-color="white" class='mx-2'>Schema</v-chip>
+                  <v-chip color="blue" label small text-color="white" class='mx-2'>Data</v-chip>
                 </p>
               </div>
             </v-col>
