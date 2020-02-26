@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="my-2">
     <v-list-group
       v-if="value.children && value.children.length > 0"
       :prepend-icon="value.icon"
