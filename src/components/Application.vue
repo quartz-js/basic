@@ -23,6 +23,7 @@
       <snackbar />
       <q-content>
         <q-container>
+          <data-view-flush />
           <router-view :user="user" :key="$route.fullPath"/>
         </q-container>
       </q-content>
@@ -36,6 +37,7 @@ require('../assets/styles/default.scss')
 import { container } from '@quartz/core'
 import NotificationIcon from '@quartz/notification/src/components/notification/notification-icon'
 import { DataViewError } from '@quartz/data-view/src/app/Errors/DataViewError'
+import DataViewFlush from '@quartz/data-view/src/components/Flush'
 import store from 'store2'
 import Snackbar from './Snackbar'
 import _ from 'lodash'
@@ -55,6 +57,7 @@ export default {
     },
   },
   components: {
+    DataViewFlush,
     SidebarItem,
     Snackbar,
     NotificationIcon,
