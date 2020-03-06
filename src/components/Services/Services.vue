@@ -1,5 +1,5 @@
 <template>
-  <div class="mt-3">
+  <div>
     <div v-for="(tag, index) in tags" :key="index">
       <service-item :tag="tag" :services="retrieveServices(tag)" :show-hidden="showHidden"></service-item>
     </div>
