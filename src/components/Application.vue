@@ -13,7 +13,7 @@
         <v-btn icon :to="{'name': 'services'}" class='mx-3' v-if="$container.get('settings').get('template.services')"><q-icon>fas fa-cubes</q-icon></v-btn>
         <notification-icon :user="user"  v-if="$container.get('settings').get('template.notification')"/>
         <div style='border-left: 2px solid #efefef; height: 36px; margin-right: 10px; margin-left: 10px'></div>
-        <div class="pa-3">{{ user.name }}</div>
+        <div class="pa-3">{{ $container.get('template').parse($container.get('settings').get('template.header-user', this.basicHeaderUser), {user: user}) }}</div>
         <avatar :user="user"/>
       </q-app-bar>
       <q-sidebar app v-model='drawer' class="navigation" v-if="$container.get('settings').get('template.leftNavEnabled')">
@@ -71,6 +71,7 @@ export default {
   },
   data () {
     return {
+      basicHeaderUser: "{{ user.name }}",
       isDark: false,
       drawer: null,
     }
