@@ -124,14 +124,17 @@ export class VueServiceProvider extends ServiceProvider {
       ]
     })
 
-    let config = (new Dictionary()).newApiByName('config')
+    try {
+      let config = (new Dictionary()).newApiByName('config')
+      return config.index({}).then(response => {
+        container.set('api.config', _.transform(response.body.data, (r, v, k) => {
+          return r[v.key] = v.value;
+        }))
 
-    return config.index({}).then(response => {
-      container.set('api.config', _.transform(response.body.data, (r, v, k) => {
-        return r[v.key] = v.value;
-      }))
-
-      console.log(container.get('api.config'));
-    })
+        console.log(container.get('api.config'));
+      })
+    } catch (e) {
+      return Promise.resolve(1)
+    }
   }
 }
