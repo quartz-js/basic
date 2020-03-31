@@ -1,34 +1,32 @@
 <template>
-  <v-app v-if="user" v-bind:style="{ background: $vuetify.theme.themes.light.background }">
-    <q-app>
+  <q-app v-if="user">
+    <q-logo :src="$container.get('api.config.logo')" />
+    <q-app-bar app class="toolbar">
+      <v-app-bar-nav-icon @click.stop="drawer = !drawer" class='mx-1' v-if="$container.get('settings').get('template.leftNavEnabled')"></v-app-bar-nav-icon>
+      <v-toolbar-title v-if="$container.get('settings').get('template.title')">{{ $root.config.app.name }}</v-toolbar-title>
+      <searcher  v-if="$container.get('settings').get('template.search')"/>
+
+      <sidebar-item v-for="item in $container.get('settings').get('template.topNavItems')" :value="item" v-if="$container.get('settings').get('template.topNavEnabled')"/>
+
+      <div class='fluid-fill'></div>
+      <v-btn icon :to="{'name': 'services'}" class='mx-3' v-if="$container.get('settings').get('template.services')"><q-icon>fas fa-cubes</q-icon></v-btn>
+      <notification-icon :user="user"  v-if="$container.get('settings').get('template.notification')"/>
+      <div style='border-left: 2px solid #efefef; height: 36px; margin-right: 10px; margin-left: 10px'></div>
+      <div class="pa-3">{{ user.name }}</div>
+      <avatar :user="user"/>
+    </q-app-bar>
+    <q-sidebar app v-model='drawer' class="navigation" v-if="$container.get('settings').get('template.leftNavEnabled')">
       <q-logo :src="$container.get('api.config.logo')" />
-      <q-app-bar app class="toolbar">
-        <v-app-bar-nav-icon @click.stop="drawer = !drawer" class='mx-1' v-if="$container.get('settings').get('template.leftNavEnabled')"></v-app-bar-nav-icon>
-        <v-toolbar-title v-if="$container.get('settings').get('template.title')">{{ $root.config.app.name }}</v-toolbar-title>
-        <searcher  v-if="$container.get('settings').get('template.search')"/>
-
-        <sidebar-item v-for="item in $container.get('settings').get('template.topNavItems')" :value="item" v-if="$container.get('settings').get('template.topNavEnabled')"/>
-
-        <div class='fluid-fill'></div>
-        <v-btn icon :to="{'name': 'services'}" class='mx-3' v-if="$container.get('settings').get('template.services')"><q-icon>fas fa-cubes</q-icon></v-btn>
-        <notification-icon :user="user"  v-if="$container.get('settings').get('template.notification')"/>
-        <div style='border-left: 2px solid #efefef; height: 36px; margin-right: 10px; margin-left: 10px'></div>
-        <div class="pa-3">{{ user.name }}</div>
-        <avatar :user="user"/>
-      </q-app-bar>
-      <q-sidebar app v-model='drawer' class="navigation" v-if="$container.get('settings').get('template.leftNavEnabled')">
-        <q-logo :src="$container.get('api.config.logo')" />
-        <sidebar-item v-for="item in $container.get('settings').get('template.leftNavItems')" :value="item" />
-      </q-sidebar>
-      <snackbar />
-      <q-content>
-        <q-container>
-          <data-view-flush />
-          <router-view :user="user" :key="$route.fullPath"/>
-        </q-container>
-      </q-content>
-    </q-app>
-  </v-app>
+      <sidebar-item v-for="item in $container.get('settings').get('template.leftNavItems')" :value="item" />
+    </q-sidebar>
+    <snackbar />
+    <q-content>
+      <q-container>
+        <data-view-flush />
+        <router-view :user="user" :key="$route.fullPath"/>
+      </q-container>
+    </q-content>
+  </q-app>
 </template>
 
 <script>
