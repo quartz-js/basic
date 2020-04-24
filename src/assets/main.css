@@ -80,3 +80,7 @@ html {
 a {
   text-decoration: none;
 }
+
+.primary-on-hover:hover {
+  color: var(--v-primary-color);
+}
