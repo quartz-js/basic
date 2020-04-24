@@ -21,9 +21,6 @@ export default {
     }
   },
   mounted () {
-
-    console.log(this.$vuetify.theme)
-
     this.user = this.$root.$data.user
   }
 }
