@@ -52,6 +52,7 @@ export class VueServiceProvider extends ServiceProvider {
       }
     })
 
+
     let vuetify = new Vuetify({
       theme: StyleService.getTheme()
     })
@@ -94,12 +95,16 @@ export class VueServiceProvider extends ServiceProvider {
           return require('js-yaml').load(string)
         }
       }
-    }).$mount('#app')
+    })
+
+    StyleService.boot();
+    container.set('$vue.app', v);
+
+    v.$mount('#app')
 
     window.bus = v
 
     container.set('translator', v._i18n)
-    container.set('$vue.app', v);
 
     container.get('settings').setDefault('template', {
       'title': true,
@@ -130,8 +135,6 @@ export class VueServiceProvider extends ServiceProvider {
         container.set('api.config', _.transform(response.body.data, (r, v, k) => {
           return r[v.key] = v.value;
         }))
-
-        console.log(container.get('api.config'));
       })
     } catch (e) {
       return Promise.resolve(1)
