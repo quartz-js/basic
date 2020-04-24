@@ -9,7 +9,7 @@ export class LocalizationServiceProvider extends ServiceProvider {
     container.set('$quartz.lang', {})
   }
   boot() {
-    require('moment').locale('en', {
+    require('moment').updateLocale('en', {
       week: { dow: 1 }
     })
 
