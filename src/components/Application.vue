@@ -1,9 +1,18 @@
 <template>
   <q-app v-if="user">
-    <q-logo :src="$container.get('api.config.logo')" />
     <q-app-bar app class="toolbar">
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" class='mx-1' v-if="$container.get('settings').get('template.leftNavEnabled')"></v-app-bar-nav-icon>
-      <v-toolbar-title class="hidden-md-and-down" v-if="$container.get('settings').get('template.title')">{{ $root.config.app.name }}</v-toolbar-title>
+      
+      <div v-if="$container.get('settings').get('template.title')" style='height: 100%'>
+        <div v-if="$root.container.get('config.app.logo')" class='py-2' style='height: 100%'>
+          <img :src="$root.container.get('config.app.logo')" style='height:100%' />
+        </div>
+      </div>
+      <v-toolbar-title 
+        v-if="$container.get('settings').get('template.title') && !$root.container.get('config.app.logo')" 
+      >{{ $root.container.get('config.app.name') }}
+      </v-toolbar-title>
+
       <searcher class="hidden-md-and-down" v-if="!$root.mobile && $container.get('settings').get('template.search')"/>
 
       <sidebar-item class="hidden-sm-and-down" v-for="item in $container.get('settings').get('template.topNavItems')" :value="item" v-if="!$root.mobile && $container.get('settings').get('template.topNavEnabled')"/>
@@ -15,7 +24,6 @@
       <avatar :user="user"/>
     </q-app-bar>
     <q-sidebar app v-model='drawer' class="navigation" v-if="$container.get('settings').get('template.leftNavEnabled')">
-      <q-logo :src="$container.get('api.config.logo')" />
       <sidebar-item v-for="item in $container.get('settings').get('template.leftNavItems')" :value="item" />
     </q-sidebar>
     <snackbar />
