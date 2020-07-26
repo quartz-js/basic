@@ -3,11 +3,10 @@
     <q-logo :src="$container.get('api.config.logo')" />
     <q-app-bar app class="toolbar">
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" class='mx-1' v-if="$container.get('settings').get('template.leftNavEnabled')"></v-app-bar-nav-icon>
-      <v-toolbar-title v-if="$container.get('settings').get('template.title')">{{ $root.config.app.name }}</v-toolbar-title>
-      <searcher  v-if="$container.get('settings').get('template.search')"/>
+      <v-toolbar-title class="hidden-md-and-down" v-if="$container.get('settings').get('template.title')">{{ $root.config.app.name }}</v-toolbar-title>
+      <searcher class="hidden-md-and-down" v-if="!$root.mobile && $container.get('settings').get('template.search')"/>
 
-      <sidebar-item v-for="item in $container.get('settings').get('template.topNavItems')" :value="item" v-if="$container.get('settings').get('template.topNavEnabled')"/>
-
+      <sidebar-item class="hidden-sm-and-down" v-for="item in $container.get('settings').get('template.topNavItems')" :value="item" v-if="!$root.mobile && $container.get('settings').get('template.topNavEnabled')"/>
       <div class='fluid-fill'></div>
       <v-btn icon :to="{'name': 'services'}" class='mx-3' v-if="$container.get('settings').get('template.services')"><q-icon>fas fa-cubes</q-icon></v-btn>
       <notification-icon :user="user"  v-if="$container.get('settings').get('template.notification')"/>
